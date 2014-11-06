@@ -15,18 +15,21 @@ namespace Game1
         private Microsoft.Xna.Framework.Content.ContentManager Content;
         private SpriteBatch m_spriteBatch;
         private Texture2D m_ballTexture;
-        private float scale;
+        private int scale;
         BallSimulation m_ballSimulation;
-        Camera m_camera;
-        Ball m_ball;
-        
-
+        Camera m_camera = new Camera();
+        Ball m_ball = new Ball();
+        private int m_windowWidth;
+        private int m_windowHeight;
 
         public BallView(GraphicsDevice GraphicsDevice, ContentManager Content)
         {
             // TODO: Complete member initialization
             this.GraphicsDevice = GraphicsDevice;
             this.Content = Content;
+            this.m_windowWidth = GraphicsDevice.Viewport.Width;
+            this.m_windowHeight = GraphicsDevice.Viewport.Height;
+
 
             m_spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -71,19 +74,18 @@ namespace Game1
             
         }
 
-        internal void drawball()
+        internal void drawball(Ball ball)
         {
-            Camera m_camera = new Camera();
-            m_ball = new Ball();
-            Rectangle destrect = new Rectangle(10, 10, 20, 30);
-            scale = m_camera.setDimensions(m_ballSimulation.width, m_ballSimulation.height);
-
-            float vx = m_camera.toViewX(m_ball.centerX);
-            float vy = m_camera.toViewY(m_ball.centerY);
-            float vBallSize = m_ball.diameter * scale;
             
+
+            int vx = (int)(ball.m_x * m_windowWidth);
+            int vy = (int)(ball.m_y * m_windowHeight);
+
+            Rectangle destrect = new Rectangle(vx-15,vy-15, 30, 30);
+            
+
             m_spriteBatch.Begin();
-            m_spriteBatch.Draw(m_ballTexture, destrect, Color.White);
+            m_spriteBatch.Draw(m_ballTexture, destrect, Color.Red);
             m_spriteBatch.End();
         }
 
@@ -91,16 +93,19 @@ namespace Game1
 
             m_ballSimulation = new BallSimulation();
             m_camera = new Camera();
+            scale = m_camera.setDimensionstask4(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+
+           m_ballTexture = Content.Load<Texture2D>("level");
 
 		for  (int x = 0; x < m_ballSimulation.width; x++) {
 			for (int y = 0; y < m_ballSimulation.height; y++)  {
-				float w = scale;
-				float h = scale;
+				int w = scale;
+				int h = scale;
 				
-					float vx = m_camera.toViewX(x);
-					float vy = m_camera.toViewY(y);
+					int vx = m_camera.toViewX(x);
+					int vy = m_camera.toViewY(y);
 
-                    Vector2 destrect = new Vector2(vx, vy);
+                    Rectangle destrect = new Rectangle(vx, vy,w,h);
        
 
                     m_spriteBatch.Begin();
@@ -111,7 +116,7 @@ namespace Game1
 			}
 		}
 
-		//top left is 0, 0
+		
 			
 		
 	}

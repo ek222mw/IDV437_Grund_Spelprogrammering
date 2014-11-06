@@ -72,12 +72,33 @@ namespace Game1
             return scale;
         }
 
-        public float toViewX(float x)
+        public int setDimensionstask4(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+            
+            int borderSizefull = borderSize * 2;
+
+            int scaleX = (width - borderSizefull);
+            int scaleY = (height - borderSizefull);
+            
+
+            scale = scaleX;
+            if (scaleY < scaleX)
+            {
+                scale = scaleY;
+            }
+
+            return scale;
+
+        }
+
+        public int toViewX(int x)
         {
             return x * scale + borderSize;
         }
 
-        public float toViewY(float y)
+        public int toViewY(int y)
         {
             return y * scale + borderSize;
         }

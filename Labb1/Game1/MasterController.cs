@@ -15,14 +15,19 @@ namespace Game1
             GraphicsDeviceManager graphics;
             SpriteBatch spriteBatch;
             BallView m_ballView;
-            Ball m_ball;
-            BallSimulation m_ballSimulation;
+            Ball m_ball = new Ball();
+            BallSimulation m_ballSimulation = new BallSimulation();
 
             public MasterController()
                 : base()
             {
                 graphics = new GraphicsDeviceManager(this);
+
+               // graphics.PreferredBackBufferHeight = 500;
+                //graphics.PreferredBackBufferWidth = 700;
+
                 Content.RootDirectory = "Content";
+
             }
 
             /// <summary>
@@ -67,15 +72,17 @@ namespace Game1
             /// <param name="gameTime">Provides a snapshot of timing values.</param>
             protected override void Update(GameTime gameTime)
             {
-
+                
+                
                 if (/*GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || */Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
-                spriteBatch.Begin();
-
-                spriteBatch.End();
+                
                 // TODO: Add your update logic here
-
+                m_ballSimulation.Update(gameTime);
+                
                 base.Update(gameTime);
+                
+                
             }
 
             /// <summary>
@@ -84,12 +91,13 @@ namespace Game1
             /// <param name="gameTime">Provides a snapshot of timing values.</param>
             protected override void Draw(GameTime gameTime)
             {
+                
                 GraphicsDevice.Clear(Color.CornflowerBlue);
 
                 //m_ballView.drawPostion();
                 //m_ballView.drawreverse();
                 //m_ballView.drawscaled();
-                //m_ballView.drawball();
+                m_ballView.drawball(m_ball);
                 m_ballView.drawLevel();
 
                 base.Draw(gameTime);

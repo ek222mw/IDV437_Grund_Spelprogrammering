@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Game1
 {
@@ -10,8 +11,8 @@ namespace Game1
         public int width = 1;
         public int height = 1;
 
-        public int[][] gamearea;
-        Ball m_ball;
+        
+        Ball m_ball = new Ball();
 
         public BallSimulation()
         {
@@ -33,39 +34,21 @@ namespace Game1
             return 1;
         }
 
-        public bool update(float timeElapsedSeconds)
+        internal void Update(GameTime gameTime)
         {
-            m_ball = new Ball();
-            m_ball.centerX = m_ball.centerX + m_ball.speedX * timeElapsedSeconds;
-
-            if (m_ball.centerX + m_ball.diameter / 2 > width)
+           
+          
+            float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
+            m_ball.m_x += elapsedTime * m_ball.speedX;
+            Console.WriteLine(m_ball.m_x);
+            if (m_ball.m_x > 1.0f)
             {
-                m_ball.speedX = m_ball.speedX * -1.0f;
-            }
-            if (m_ball.centerX - m_ball.diameter / 2 < 0)
-            {
-                m_ball.speedX = m_ball.speedX * -1.0f;
-            }
-
-            m_ball.centerY = m_ball.centerY + m_ball.speedY * timeElapsedSeconds;
-
-
-            if (m_ball.centerY - m_ball.diameter / 2 < 0)
-            {
-                m_ball.speedY = m_ball.speedY * -1.0f;
+                m_ball.m_x -= 1.0f;
+        
             }
 
-            if (m_ball.centerY + m_ball.diameter / 2 > height)
-            {
-                return true;
-            }
 
-            if (m_ball.centerY + m_ball.diameter / 2 > height)
-            {
-                return true;
-            }
-
-            return false;
         }
         
     }
