@@ -12,29 +12,15 @@ namespace Game1
         public int height = 1;
 
         
-        Ball m_ball = new Ball();
+        
 
         public BallSimulation()
         {
 
         }
 
-        public int Level()
-        {
-            int[][] gamearea = new int[width][];
-            for (int x = 0; x < width; x++)
-            {
-                gamearea[x] = new int[height];
-                for (int y = 0; y < height; y++)
-                {
 
-                    return gamearea[x][y] = new int();
-                }
-            }
-            return 1;
-        }
-
-        internal void Update(GameTime gameTime)
+        internal void Update(GameTime gameTime, Ball m_ball)
         {
            
           

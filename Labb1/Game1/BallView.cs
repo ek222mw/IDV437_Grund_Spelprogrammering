@@ -16,9 +16,9 @@ namespace Game1
         private SpriteBatch m_spriteBatch;
         private Texture2D m_ballTexture;
         private int scale;
-        BallSimulation m_ballSimulation;
+        BallSimulation m_ballSimulation = new BallSimulation();
         Camera m_camera = new Camera();
-        Ball m_ball = new Ball();
+       
         private int m_windowWidth;
         private int m_windowHeight;
 
@@ -74,12 +74,12 @@ namespace Game1
             
         }
 
-        internal void drawball(Ball ball)
+        internal void drawball(Ball m_ball)
         {
             
 
-            int vx = (int)(ball.m_x * m_windowWidth);
-            int vy = (int)(ball.m_y * m_windowHeight);
+            int vx = (int)(m_ball.m_x * m_windowWidth);
+            int vy = (int)(m_ball.m_y * m_windowHeight);
 
             Rectangle destrect = new Rectangle(vx-15,vy-15, 30, 30);
             
@@ -91,8 +91,8 @@ namespace Game1
 
         internal void drawLevel() {
 
-            m_ballSimulation = new BallSimulation();
-            m_camera = new Camera();
+            
+            
             scale = m_camera.setDimensionstask4(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
            m_ballTexture = Content.Load<Texture2D>("level");

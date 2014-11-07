@@ -78,7 +78,7 @@ namespace Game1
                     Exit();
                 
                 // TODO: Add your update logic here
-                m_ballSimulation.Update(gameTime);
+                m_ballSimulation.Update(gameTime, m_ball);
                 
                 base.Update(gameTime);
                 
