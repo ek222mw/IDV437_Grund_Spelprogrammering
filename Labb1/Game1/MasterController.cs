@@ -17,14 +17,15 @@ namespace Game1
             BallView m_ballView;
             Ball m_ball = new Ball();
             BallSimulation m_ballSimulation = new BallSimulation();
+            Texture2D pixel;
 
             public MasterController()
                 : base()
             {
                 graphics = new GraphicsDeviceManager(this);
 
-               // graphics.PreferredBackBufferHeight = 500;
-                //graphics.PreferredBackBufferWidth = 700;
+               graphics.PreferredBackBufferHeight = 100;
+               graphics.PreferredBackBufferWidth = 200;
 
                 Content.RootDirectory = "Content";
 
@@ -50,8 +51,15 @@ namespace Game1
             protected override void LoadContent()
             {
                 // Create a new SpriteBatch, which can be used to draw textures.
+                
+
+                // Somewhere in your LoadContent() method:
+                pixel = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+                pixel.SetData(new[] { Color.White}); // so that we can draw whatever color we want on top of it
+
                 m_ballView = new BallView(GraphicsDevice, Content);
                 spriteBatch = new SpriteBatch(GraphicsDevice);
+
 
                 // TODO: use this.Content to load your game content here
             }
@@ -92,13 +100,22 @@ namespace Game1
             protected override void Draw(GameTime gameTime)
             {
                 
-                GraphicsDevice.Clear(Color.CornflowerBlue);
+                GraphicsDevice.Clear(Color.AliceBlue);
 
+                int borderWidth = GraphicsDevice.Viewport.Width/ 10;
+                int borderHeight = GraphicsDevice.Viewport.Height / 10;
+
+                Rectangle titleSafeRectangle = GraphicsDevice.Viewport.TitleSafeArea;
+
+               
                 //m_ballView.drawPostion();
                 //m_ballView.drawreverse();
                 //m_ballView.drawscaled();
+                m_ballView.drawLevel(titleSafeRectangle, borderWidth,borderHeight, Color.Red, pixel);
+               
                 m_ballView.drawball(m_ball);
-                m_ballView.drawLevel();
+                
+                
 
                 base.Draw(gameTime);
             }

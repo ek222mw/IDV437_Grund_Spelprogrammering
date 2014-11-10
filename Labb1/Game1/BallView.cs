@@ -33,7 +33,7 @@ namespace Game1
 
             m_spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            m_ballTexture = Content.Load<Texture2D>("ball");
+            
         }
 
         internal void drawPostion()
@@ -76,49 +76,81 @@ namespace Game1
 
         internal void drawball(Ball m_ball)
         {
-            
+           m_ballTexture = Content.Load<Texture2D>("ball");
 
-            int vx = (int)(m_ball.m_x * m_windowWidth);
-            int vy = (int)(m_ball.m_y * m_windowHeight);
+           int scaledballWidth = m_windowWidth/10;
+           int scaledballHeight = m_windowHeight/10;
 
-            Rectangle destrect = new Rectangle(vx-15,vy-15, 30, 30);
+           int vx = (int)(m_ball.m_x * m_windowWidth);
+           int vy = (int)(m_ball.m_y * m_windowHeight);
+
+            Rectangle destrect = new Rectangle(vx-scaledballWidth,vy-scaledballHeight, scaledballWidth, scaledballHeight);
             
 
             m_spriteBatch.Begin();
-            m_spriteBatch.Draw(m_ballTexture, destrect, Color.Red);
+            m_spriteBatch.Draw(m_ballTexture, destrect, Color.White);
             m_spriteBatch.End();
         }
 
-        internal void drawLevel() {
+        internal void drawLevel(Rectangle rectangleToDraw, int thicknessOfBorder,int thicknessOfBorderHeight, Color borderColor, Texture2D pixel)
+        {
 
-            
-            
             scale = m_camera.setDimensionstask4(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
            m_ballTexture = Content.Load<Texture2D>("level");
 
-		for  (int x = 0; x < m_ballSimulation.width; x++) {
-			for (int y = 0; y < m_ballSimulation.height; y++)  {
+
+
+
+		
 				int w = scale;
 				int h = scale;
 				
-					int vx = m_camera.toViewX(x);
-					int vy = m_camera.toViewY(y);
+					int vx = m_camera.toViewX(m_windowWidth);
+					int vy = m_camera.toViewY(m_windowHeight);
 
-                    Rectangle destrect = new Rectangle(vx, vy,w,h);
+
+
+                  
+                    
        
 
                     m_spriteBatch.Begin();
-                    m_spriteBatch.Draw(m_ballTexture, destrect, Color.White);
+
+                   
+
+                    
+                   
+                  // Draw top line
+                   m_spriteBatch.Draw(pixel, new Rectangle(rectangleToDraw.X, rectangleToDraw.Y, rectangleToDraw.Width, thicknessOfBorderHeight), borderColor);
+
+                   // Draw left line
+                   m_spriteBatch.Draw(pixel, new Rectangle(rectangleToDraw.X, rectangleToDraw.Y, thicknessOfBorder, rectangleToDraw.Height), borderColor);
+
+                   // Draw right line
+                   m_spriteBatch.Draw(pixel, new Rectangle((rectangleToDraw.X + rectangleToDraw.Width - thicknessOfBorder),
+                                                   rectangleToDraw.Y,
+                                                   thicknessOfBorder,
+                                                  rectangleToDraw.Height), borderColor);
+                   
+                    // Draw bottom line
+                  m_spriteBatch.Draw(pixel, new Rectangle(rectangleToDraw.X,
+                                                  rectangleToDraw.Y + rectangleToDraw.Height - thicknessOfBorderHeight,
+                                                  rectangleToDraw.Width,
+                                                  thicknessOfBorder), borderColor);
+
+                       
+
                     m_spriteBatch.End();
+
 					
-				
-			}
-		}
+		
+        }
+
 
 		
 			
 		
 	}
     }
-}
+

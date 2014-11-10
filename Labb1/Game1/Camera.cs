@@ -91,6 +91,9 @@ namespace Game1
 
             return scale;
 
+            
+
+
         }
 
         public int toViewX(int x)

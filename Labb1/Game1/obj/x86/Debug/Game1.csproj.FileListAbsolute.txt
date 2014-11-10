@@ -24,3 +24,4 @@ c:\users\lol\documents\visual studio 2012\Projects\Game1\Game1\bin\Windows\Debug
 c:\users\lol\documents\visual studio 2012\Projects\Game1\Game1\obj\x86\Debug\Game1.exe
 c:\users\lol\documents\visual studio 2012\Projects\Game1\Game1\obj\x86\Debug\Game1.pdb
 c:\users\lol\documents\visual studio 2012\Projects\Game1\Game1\bin\Windows\Debug\Content\level.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\Game1\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache
