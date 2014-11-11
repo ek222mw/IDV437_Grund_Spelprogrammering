@@ -35,12 +35,12 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Ball.cs" />
-    <Compile Include="BallSimulation.cs" />
-    <Compile Include="BallView.cs" />
-    <Compile Include="Camera.cs" />
+    <Compile Include="Model\Ball.cs" />
+    <Compile Include="Model\BallSimulation.cs" />
+    <Compile Include="View\BallView.cs" />
+    <Compile Include="View\Camera.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="MasterController.cs" />
+    <Compile Include="Controller\MasterController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
