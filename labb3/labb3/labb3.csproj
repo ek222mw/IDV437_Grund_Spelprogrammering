@@ -46,6 +46,7 @@
     <Compile Include="View\ExplotionSystem.cs" />
     <Compile Include="View\NewEffectSystem.cs" />
     <Compile Include="View\NewParticle.cs" />
+    <Compile Include="View\ShootSystem.cs" />
     <Compile Include="View\SmokeParticle.cs" />
     <Compile Include="View\SmokeSystem.cs" />
     <Compile Include="View\SplitterParticle.cs" />

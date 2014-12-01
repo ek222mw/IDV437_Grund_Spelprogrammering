@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace labb3.View
 {
@@ -23,6 +26,8 @@ namespace labb3.View
         private float m_minSpeed = 0.25f;
         private bool hasASystem = false;
         private Camera m_camera;
+        private MouseState m_ms;
+        private bool buttonIsPressed;
 
         public NewEffectSystem(Viewport viewport)
         {
@@ -30,14 +35,9 @@ namespace labb3.View
 
             m_particles = new NewParticle[MAX_PARTICLES];
 
-
-
-
-
-
         }
 
-        private void DoNewSystem()
+        private void DoNewSystem(MouseState a_ms)
         {
             Random random = new Random();
 
@@ -50,7 +50,7 @@ namespace labb3.View
 
                 float randColor = dist;
                 Color color = new Color(1, randColor, randColor);
-                m_particles[i] = new NewParticle(m_direct, color);
+                m_particles[i] = new NewParticle(m_direct, color,m_camera,a_ms);
             }
             hasASystem = true;
 
@@ -58,8 +58,9 @@ namespace labb3.View
         }
 
 
-        public void Update(float a_timeElapsed)
+        public void Update(float a_timeElapsed,MouseState a_ms)
         {
+            m_ms = a_ms;
             m_time += a_timeElapsed;
             if (hasASystem)
             {
@@ -69,19 +70,20 @@ namespace labb3.View
                 }
 
             }
-            if (m_time > m_MinRunningtime && hasASystem == false)
+            if (m_time > m_MinRunningtime && hasASystem == false && buttonIsPressed)
             {
-
-                DoNewSystem();
+                
+                DoNewSystem(m_ms);
 
             }
             else if (hasASystem && m_time > m_MaxRunningtime)
             {
+                buttonIsPressed = false;
                 m_time = 0;
                 hasASystem = false;
             }
 
-
+            
         }
 
 
@@ -98,6 +100,20 @@ namespace labb3.View
 
 
 
+        }
+
+        public void setbuttonPressed(MouseState ms)
+        {
+            ms = Mouse.GetState();
+            if (ms.LeftButton == ButtonState.Pressed)
+            {
+                buttonIsPressed = true;
+            }
+        }
+
+        public bool getButtonStatus()
+        {
+            return buttonIsPressed;
         }
 
     }

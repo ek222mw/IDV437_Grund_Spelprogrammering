@@ -4,24 +4,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace labb3.View
 {
-    class NewParticle
+    class SplitterParticle
     {
 
-        private Color m_color;
         private Vector2 m_velocity;
         private Vector2 m_position;
         private Vector2 m_particleAcceleration;
         private float m_sizeSplitter = 0.03f;
 
-        public NewParticle(Vector2 a_velocity, Color a_color)
+        public SplitterParticle(Vector2 a_velocity, Camera a_camera, MouseState a_ms)
         {
-            m_position = new Vector2(0.5f, 0.5f);
+           
+            Vector2 modelpos = a_camera.getModelCoordinates(a_ms.X, a_ms.Y);
+            m_position = new Vector2(modelpos.X, modelpos.Y);
+           
             m_velocity = a_velocity;
-            m_particleAcceleration = new Vector2(0, 0);
-            m_color = a_color;
+            m_particleAcceleration = new Vector2(0, 0.3f);
+
 
         }
 
@@ -50,7 +55,7 @@ namespace labb3.View
         {
 
             a_spriteBatch.Begin();
-            a_spriteBatch.Draw(a_textureSplitter, m_camera.ScaleParticles(m_position.X, m_position.Y, m_sizeSplitter), m_color);
+            a_spriteBatch.Draw(a_textureSplitter, m_camera.ScaleParticles(m_position.X, m_position.Y, m_sizeSplitter), Color.Red);
             a_spriteBatch.End();
 
 

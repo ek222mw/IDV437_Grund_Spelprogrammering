@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Input;
 
 namespace labb3.View
 {
@@ -18,10 +19,15 @@ namespace labb3.View
         private float m_maxTimeToLive = 3.0f;
         private float m_rotation = 0.2f;
         private float m_maxSpeed = 0.3f;
-
-        public SmokeParticle()
+        
+        public SmokeParticle(Vector2 a_position)
         {
-            m_position = new Vector2(0.5f, 0.5f);
+           
+           //Vector2 modelpos = a_camera.getModelCoordinates(a_ms.X, a_ms.Y);
+           //m_position = new Vector2(modelpos.X, modelpos.Y);
+
+            m_position = a_position;
+           
             m_particleAcceleration = new Vector2(0, -0.3f);
             m_timeLived = 0;
             m_maxLifeTime = 2.0f;
@@ -78,7 +84,7 @@ namespace labb3.View
 
         public void doRespawn()
         {
-            m_position = new Vector2(0.5f, 0.5f);
+            //m_position = new Vector2(0.5f, 0.5f);
 
             Random rand = new Random();
             m_velocity = new Vector2(((float)rand.NextDouble() - 0.5f), ((float)rand.NextDouble() - 0.5f));

@@ -3,6 +3,7 @@ using labb3.View;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace labb3
 {
@@ -29,10 +30,17 @@ namespace labb3
         ExplotionSystem m_explotionSystem;
         NewEffectSystem m_newEffectSystem;
         Texture2D m_newTexture2D;
+        private List<SmokeSystem> effects;
+        private MouseState currentMouseState;
+        private MouseState previousMouseState;
+        private Vector2 mousePos;
+        private List<SplitterSystem> splitterEffects;
+        private Vector2 mousePosSplitter;
 
         public Game1()
             : base()
         {
+            this.IsMouseVisible = true;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -46,9 +54,11 @@ namespace labb3
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            MouseState mouse = Mouse.GetState();
             m_splittersystem = new SplitterSystem(GraphicsDevice.Viewport);
-            m_smokesystem = new SmokeSystem(GraphicsDevice.Viewport);
+            m_smokesystem = new SmokeSystem(GraphicsDevice.Viewport, mousePos);
             destRect = new Rectangle(0, 0, 128, 128);
+            
             m_newEffectSystem = new NewEffectSystem(GraphicsDevice.Viewport);
             base.Initialize();
         }
@@ -63,6 +73,8 @@ namespace labb3
             spriteBatch = new SpriteBatch(GraphicsDevice);
             m_splitterTexture2D = Content.Load<Texture2D>("spark");
             m_smokeTexture2D = Content.Load<Texture2D>("particlesmoke");
+            effects = new List<SmokeSystem>();
+            splitterEffects = new List<SplitterSystem>();
             pixel = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             pixel.SetData(new[] { Color.White }); // so that we can draw whatever color we want on top of it
             m_newTexture2D = Content.Load<Texture2D>("spark");
@@ -94,11 +106,61 @@ namespace labb3
                 Exit();
 
             // TODO: Add your update logic here
-            m_splittersystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            m_ballSimulation.Update(gameTime, m_ball);
-            m_explotionSystem.Draw(spriteBatch, (float)gameTime.ElapsedGameTime.TotalSeconds);
-            m_smokesystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-            m_newEffectSystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            
+            //m_ballSimulation.Update(gameTime, m_ball);
+            //m_explotionSystem.Draw(spriteBatch, (float)gameTime.ElapsedGameTime.TotalSeconds);
+            
+            MouseState CurrentMouseClicked = Mouse.GetState();
+            MouseState previousmouseClicked = Mouse.GetState();
+
+            m_newEffectSystem.setbuttonPressed(CurrentMouseClicked);
+            m_splittersystem.setbuttonPressed(CurrentMouseClicked);
+
+
+            if (m_splittersystem.getButtonStatus())
+            {
+                m_splittersystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds, CurrentMouseClicked);
+            }
+
+            if (m_newEffectSystem.getButtonStatus())
+            {
+                
+                m_newEffectSystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds, CurrentMouseClicked);
+
+            }
+            bool mouseIsClicked = false;
+            currentMouseState = Mouse.GetState();
+
+            if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            {
+                mouseIsClicked = true;
+            }
+
+            previousMouseState = currentMouseState;
+
+            
+            if (mouseIsClicked)
+            {
+                mousePos = m_smokesystem.GetMousePos();
+                //mousePosSplitter = m_splittersystem.GetMousePos();
+
+
+                effects.Add(new SmokeSystem(GraphicsDevice.Viewport,mousePos));
+                //splitterEffects.Add(new SplitterSystem(GraphicsDevice.Viewport, mousePosSplitter));
+                
+            }
+
+            //foreach (var splitterparticle in splitterEffects)
+            //{
+            //    splitterparticle.Update((float)gameTime.ElapsedGameTime.TotalSeconds, CurrentMouseClicked);
+            //}
+
+            foreach (var particle in effects)
+            {
+                particle.Update((float)gameTime.ElapsedGameTime.TotalSeconds,CurrentMouseClicked);
+            }
+
+            
             base.Update(gameTime);
         }
 
@@ -111,13 +173,31 @@ namespace labb3
             GraphicsDevice.Clear(Color.CornflowerBlue);
             Rectangle titleSafeRectangle = GraphicsDevice.Viewport.TitleSafeArea;
             // TODO: Add your drawing code here
-            m_ballView.drawLevel(titleSafeRectangle, framesize, Color.Red, pixel);
+            //m_ballView.drawLevel(titleSafeRectangle, framesize, Color.Red, pixel);
 
-            m_ballView.drawball(m_ball, framesize);
-            m_splittersystem.Draw(spriteBatch, m_splitterTexture2D);
-            m_smokesystem.Draw(spriteBatch, m_smokeTexture2D);
-            m_explotionSystem.Draw(spriteBatch, (float)gameTime.ElapsedGameTime.TotalSeconds);
-            m_newEffectSystem.Draw(spriteBatch, m_newTexture2D);
+            //m_ballView.drawball(m_ball, framesize);
+            
+            
+            //m_explotionSystem.Draw(spriteBatch, (float)gameTime.ElapsedGameTime.TotalSeconds);
+            MouseState mouse = Mouse.GetState();
+            m_newEffectSystem.setbuttonPressed(mouse);
+            m_splittersystem.setbuttonPressed(mouse);
+
+            if (m_splittersystem.getButtonStatus())
+            {
+                m_splittersystem.Draw(spriteBatch, m_splitterTexture2D);
+            }
+
+            if (m_newEffectSystem.getButtonStatus())
+            {
+                
+                m_newEffectSystem.Draw(spriteBatch, m_newTexture2D);
+            }
+            foreach(var smoke in effects)
+            {
+                smoke.Draw(spriteBatch, m_smokeTexture2D);
+            }
+            
             base.Draw(gameTime);
         }
     }

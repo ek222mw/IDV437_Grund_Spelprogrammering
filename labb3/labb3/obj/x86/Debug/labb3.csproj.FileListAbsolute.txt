@@ -25,6 +25,5 @@ c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\SharpDX.XInput.xml
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\SharpDX.RawInput.xml
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\SharpDX.Direct3D9.xml
-c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\obj\x86\Debug\labb3.csprojResolveAssemblyReference.cache
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\obj\x86\Debug\labb3.exe
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\obj\x86\Debug\labb3.pdb

@@ -16,8 +16,10 @@ namespace labb3.View
         private int scaleBall;
        
         private int borderSizetask4 = 20;
-        private float scaleExplotion;
+        
         private static int border = 10;
+        private int displacementX = 0;
+        private int displacementY = 0;
 
         public Camera(int a_width, int a_height)
         {
@@ -30,6 +32,15 @@ namespace labb3.View
             {
                 scale = ScaleY;
             }
+
+        }
+
+        public Vector2 getModelCoordinates(float viewX, float viewY)
+        {
+            float modelX = (viewX - displacementX) / scale;
+            float modelY = (viewY - displacementY) / scale;
+
+            return new Vector2(modelX, modelY);
 
         }
 
