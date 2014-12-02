@@ -18,9 +18,9 @@ namespace labb3
 
         SplitterSystem m_splittersystem;
         Texture2D m_splitterTexture2D;
-        private float timeElapsed;
+        
         BallView m_ballView;
-        Ball m_ball = new Ball();
+       
         BallSimulation m_ballSimulation = new BallSimulation();
         Texture2D pixel;
         private int framesize = 20;
@@ -36,9 +36,12 @@ namespace labb3
         private MouseState PreviousMouseState;
         private Vector2 mousePos;
         private List<SplitterSystem> splitterEffects;
-        private Vector2 mousePosSplitter;
+        private MouseView m_mouse;
+        private Camera m_camera;
+        private Texture2D m_aimTexture;
+        
         private bool hasAParticleSystem;
-        private bool holdbuttonstatus;
+       
         private bool mouseIsClicked;
 
         public Game1()
@@ -62,6 +65,7 @@ namespace labb3
             m_splittersystem = new SplitterSystem(GraphicsDevice.Viewport);
             m_smokesystem = new SmokeSystem(GraphicsDevice.Viewport, mousePos);
             destRect = new Rectangle(0, 0, 128, 128);
+            m_camera = new Camera(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             
             m_newEffectSystem = new NewEffectSystem(GraphicsDevice.Viewport);
             base.Initialize();
@@ -85,6 +89,11 @@ namespace labb3
             m_ballView = new BallView(GraphicsDevice, Content);
             m_texture2d = Content.Load<Texture2D>("explosion");
             m_explotionSystem = new ExplotionSystem(GraphicsDevice.Viewport, Content);
+            m_aimTexture = Content.Load<Texture2D>("Aim");
+            m_camera = new Camera(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+           
+            
+            m_mouse = new MouseView(GraphicsDevice, m_camera);
            
             
             // TODO: use this.Content to load your game content here
@@ -110,16 +119,20 @@ namespace labb3
                 Exit();
 
             // TODO: Add your update logic here
-            
-            //m_ballSimulation.Update(gameTime, m_ball);
+
             //m_explotionSystem.Draw(spriteBatch, (float)gameTime.ElapsedGameTime.TotalSeconds);
-            
-            
-
+   
            startSystemWhenMouseIsClicked();
-           
 
-          
+
+           if (mouseIsClicked)
+           {
+               Vector2 mousePosition = m_splittersystem.GetMousePos();
+               m_ballSimulation.ballsInsideShootArea(mousePosition);
+           }
+
+           m_ballSimulation.Update(gameTime);
+
             if (hasAParticleSystem)
             {
                m_splittersystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
@@ -140,12 +153,8 @@ namespace labb3
             if (mouseIsClicked)
             {
                 mousePos = m_smokesystem.GetMousePos();
-                //mousePosSplitter = m_splittersystem.GetMousePos();
-
-
                 effects.Add(new SmokeSystem(GraphicsDevice.Viewport,mousePos));
-                //splitterEffects.Add(new SplitterSystem(GraphicsDevice.Viewport, mousePosSplitter));
-                
+               
             }
 
             foreach (var particle in effects)
@@ -166,16 +175,16 @@ namespace labb3
             GraphicsDevice.Clear(Color.CornflowerBlue);
             Rectangle titleSafeRectangle = GraphicsDevice.Viewport.TitleSafeArea;
             // TODO: Add your drawing code here
-            //m_ballView.drawLevel(titleSafeRectangle, framesize, Color.Red, pixel);
+            m_ballView.drawLevel(titleSafeRectangle, framesize, Color.Red, pixel);
 
-            //m_ballView.drawball(m_ball, framesize);
-            
+            m_mouse.drawMouseAim(m_aimTexture, m_ballSimulation.getShootDiameter, CurrentMouseState);
+            foreach (var ball in m_ballSimulation.m_ballList)
+            {
+                m_ballView.drawball(ball.CenterX, ball.CenterY, ball.Diameter, ball.IsDead,framesize);
+            }
             
             //m_explotionSystem.Draw(spriteBatch, (float)gameTime.ElapsedGameTime.TotalSeconds);
-            
-            
-
-           
+          
             if (hasAParticleSystem)
             {
                 m_splittersystem.Draw(spriteBatch, m_splitterTexture2D);
@@ -192,9 +201,7 @@ namespace labb3
 
         protected void startSystemWhenMouseIsClicked()
         {
-           
-           
-            if (mouseIsClicked )
+          if (mouseIsClicked )
             {
                
                 hasAParticleSystem = true;

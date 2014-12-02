@@ -11,8 +11,7 @@ namespace labb3.View
 {
     class NewParticle
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        
         private Color m_color;
         private Vector2 m_velocity;
         private Vector2 m_position;

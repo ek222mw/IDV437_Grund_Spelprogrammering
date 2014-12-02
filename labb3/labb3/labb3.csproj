@@ -44,6 +44,7 @@
     <Compile Include="View\Camera.cs" />
     <Compile Include="View\ExplotionParticle.cs" />
     <Compile Include="View\ExplotionSystem.cs" />
+    <Compile Include="View\MouseView.cs" />
     <Compile Include="View\NewEffectSystem.cs" />
     <Compile Include="View\NewParticle.cs" />
     <Compile Include="View\ShootSystem.cs" />
@@ -60,7 +61,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Aim.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\ball.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\DeadBall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\explosion.png">

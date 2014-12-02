@@ -25,7 +25,6 @@ namespace labb3.View
         private float m_minSpeed = 0.25f;
         private bool hasASystem = false;
         private Camera m_camera;
-        private MouseState m_ms;
         private bool buttonIsPressed;
 
         public NewEffectSystem(Viewport viewport)

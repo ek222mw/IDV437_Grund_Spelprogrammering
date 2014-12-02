@@ -38,21 +38,25 @@ namespace labb3.View
 
         }
 
-        internal void drawball(Ball m_ball, int framesize)
+        internal void drawball(float centerX, float centerY, float diameter, bool isDead,int framesize)
         {
 
-            float balldiameter;
-            m_ballTexture = Content.Load<Texture2D>("ball");
-
+           
             scale = m_camera.getScale();
-            balldiameter = m_ball.diameter;
+           
 
-            int vx = (int)(m_ball.m_x * m_camera.getScale() + framesize);
-            int vy = (int)(m_ball.m_y * m_camera.getScale() + framesize);
-            int ballSize = (int)(balldiameter * scale);
+            int vx = (int)(centerX * m_camera.getScale() + framesize);
+            int vy = (int)(centerY * m_camera.getScale() + framesize);
+            int ballSize = (int)(diameter * scale);
 
             Rectangle destrect = new Rectangle(vx - ballSize / 2, vy - ballSize / 2, ballSize, ballSize);
 
+            m_ballTexture = Content.Load<Texture2D>("ball");
+
+            if (isDead)
+            {
+                m_ballTexture = Content.Load<Texture2D>("DeadBall");
+            }
 
             m_spriteBatch.Begin();
             m_spriteBatch.Draw(m_ballTexture, destrect, Color.White);

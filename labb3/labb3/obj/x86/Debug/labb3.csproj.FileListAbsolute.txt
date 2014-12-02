@@ -1,4 +1,6 @@
+c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\Content\Aim.png
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\Content\ball.png
+c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\Content\DeadBall.png
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\Content\explosion.png
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\Content\level.png
 c:\users\lol\documents\visual studio 2012\Projects\labb3\labb3\bin\Windows\Debug\Content\particlesmoke.png
