@@ -4,8 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+
 using Microsoft.Xna.Framework.Input;
 
 namespace labb3.View
@@ -20,13 +19,13 @@ namespace labb3.View
         private Vector2 m_particleAcceleration;
         private float m_sizeSplitter = 0.03f;
 
-        public NewParticle(Vector2 a_velocity, Color a_color,Camera a_camera, MouseState a_ms)
+        public NewParticle(Vector2 a_velocity, Color a_color,Camera a_camera, Vector2 a_position)
         {
             m_velocity = a_velocity;
             m_particleAcceleration = new Vector2(0, 0);
             m_color = a_color;
-            Vector2 modelpos = a_camera.getModelCoordinates(a_ms.X, a_ms.Y);
-            m_position = new Vector2(modelpos.X, modelpos.Y);
+            //Vector2 modelpos = a_camera.getModelCoordinates(a_ms.X, a_ms.Y);
+            m_position = new Vector2(a_position.X, a_position.Y);
         }
 
         public void Update(float elapsedTime)

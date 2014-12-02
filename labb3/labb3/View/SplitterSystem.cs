@@ -19,27 +19,21 @@ namespace labb3.View
         SplitterParticle[] m_particles;
         private bool hasASystem = false;
         private float m_time = 0;
-        private float m_runningtime = 1;
+        private float m_runningtime = 2.0f;
         private float m_MaxSpeed = 0.3f;
-        private bool buttonIsPressed;
         private Camera m_camera;
-        private MouseState m_ms;
-        Vector2 m_position;
-        private MouseState currentMouseState;
+       
+        
+        
         public SplitterSystem(Viewport viewport)
         {
             m_camera = new Camera(viewport.Width, viewport.Height);
 
             m_particles = new SplitterParticle[MAX_PARTICLES];
 
-           
-
-            
-          // DoNewSystem(m_ms);
-
         }
 
-        private void DoNewSystem(MouseState a_ms)
+        public void DoNewSystem(Vector2 a_position)
         {
             Random random = new Random();
 
@@ -48,20 +42,20 @@ namespace labb3.View
                 Vector2 m_direct = new Vector2(((float)random.NextDouble() - 0.5f), ((float)random.NextDouble() - 0.5f));
                 m_direct.Normalize();
                 m_direct = m_direct * ((float)random.NextDouble() * m_MaxSpeed);
-                m_particles[i] = new SplitterParticle(m_direct,m_camera,a_ms);
+                m_particles[i] = new SplitterParticle(m_direct,m_camera,a_position);
             }
             hasASystem = true;
-
 
         }
 
 
-        public void Update(float a_timeElapsed, MouseState a_ms)
+        public void Update(float a_timeElapsed)
         {
             m_time += a_timeElapsed;
-            m_ms = a_ms;
+           
             if (hasASystem)
             {
+                
                 for (int i = 0; i < MAX_PARTICLES; i++)
                 {
                     m_particles[i].Update(a_timeElapsed);
@@ -73,15 +67,11 @@ namespace labb3.View
             if (m_time > m_runningtime)
             {
                 hasASystem = false;
-                buttonIsPressed = false;
+               
                 m_time = 0;
-                DoNewSystem(a_ms);
-
             }
-            
-
+           
         }
-
 
         public void Draw(SpriteBatch a_spriteBatch, Texture2D a_textureSplitter)
         {
@@ -94,27 +84,11 @@ namespace labb3.View
                 }
             }
 
-
-
-        }
-
-        public void setbuttonPressed(MouseState ms)
-        {
-            ms = Mouse.GetState();
-            if (ms.LeftButton == ButtonState.Pressed)
-            {
-                buttonIsPressed = true;
-            }
-        }
-
-        public bool getButtonStatus()
-        {
-            return buttonIsPressed;
         }
 
         public Vector2 GetMousePos()
         {
-            currentMouseState = Mouse.GetState();
+            MouseState currentMouseState = Mouse.GetState();
 
             float x = currentMouseState.X;
             float y = currentMouseState.Y;

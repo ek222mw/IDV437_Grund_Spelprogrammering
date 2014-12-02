@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+
 
 namespace labb3.View
 {
@@ -37,7 +36,7 @@ namespace labb3.View
 
         }
 
-        private void DoNewSystem(MouseState a_ms)
+        public void DoNewSystem(Vector2 a_position)
         {
             Random random = new Random();
 
@@ -50,7 +49,7 @@ namespace labb3.View
 
                 float randColor = dist;
                 Color color = new Color(1, randColor, randColor);
-                m_particles[i] = new NewParticle(m_direct, color,m_camera,a_ms);
+                m_particles[i] = new NewParticle(m_direct, color,m_camera,a_position);
             }
             hasASystem = true;
 
@@ -58,9 +57,9 @@ namespace labb3.View
         }
 
 
-        public void Update(float a_timeElapsed,MouseState a_ms)
+        public void Update(float a_timeElapsed)
         {
-            m_ms = a_ms;
+            
             m_time += a_timeElapsed;
             if (hasASystem)
             {
@@ -70,15 +69,16 @@ namespace labb3.View
                 }
 
             }
-            if (m_time > m_MinRunningtime && hasASystem == false && buttonIsPressed)
+            if (m_time > m_MinRunningtime && hasASystem == false)
             {
-                
-                DoNewSystem(m_ms);
+                buttonIsPressed = true;
+                //DoNewSystem(m_ms);
 
             }
             else if (hasASystem && m_time > m_MaxRunningtime)
             {
                 buttonIsPressed = false;
+                getPressedButton();
                 m_time = 0;
                 hasASystem = false;
             }
@@ -97,24 +97,27 @@ namespace labb3.View
                     m_particles[i].Draw(a_spriteBatch, a_textureSplitter, m_camera);
                 }
             }
-
-
-
         }
-
-        public void setbuttonPressed(MouseState ms)
-        {
-            ms = Mouse.GetState();
-            if (ms.LeftButton == ButtonState.Pressed)
-            {
-                buttonIsPressed = true;
-            }
-        }
-
-        public bool getButtonStatus()
+        public bool getPressedButton()
         {
             return buttonIsPressed;
         }
+
+        public Vector2 GetMousePos()
+        {
+            MouseState currentMouseState = Mouse.GetState();
+
+            float x = currentMouseState.X;
+            float y = currentMouseState.Y;
+
+            Vector2 mouseModelPos = m_camera.getModelCoordinates(x, y);
+
+            return mouseModelPos;
+        }
+
+        
+
+        
 
     }
 }

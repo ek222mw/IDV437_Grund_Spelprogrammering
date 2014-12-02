@@ -18,15 +18,12 @@ namespace labb3.View
         private Vector2 m_particleAcceleration;
         private float m_sizeSplitter = 0.03f;
 
-        public SplitterParticle(Vector2 a_velocity, Camera a_camera, MouseState a_ms)
+        public SplitterParticle(Vector2 a_velocity, Camera a_camera, Vector2 a_position)
         {
            
-            Vector2 modelpos = a_camera.getModelCoordinates(a_ms.X, a_ms.Y);
-            m_position = new Vector2(modelpos.X, modelpos.Y);
-           
+            m_position = new Vector2(a_position.X, a_position.Y);
             m_velocity = a_velocity;
             m_particleAcceleration = new Vector2(0, 0.3f);
-
 
         }
 

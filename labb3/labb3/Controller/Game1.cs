@@ -3,6 +3,7 @@ using labb3.View;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace labb3
@@ -31,11 +32,14 @@ namespace labb3
         NewEffectSystem m_newEffectSystem;
         Texture2D m_newTexture2D;
         private List<SmokeSystem> effects;
-        private MouseState currentMouseState;
-        private MouseState previousMouseState;
+        private MouseState CurrentMouseState;
+        private MouseState PreviousMouseState;
         private Vector2 mousePos;
         private List<SplitterSystem> splitterEffects;
         private Vector2 mousePosSplitter;
+        private bool hasAParticleSystem;
+        private bool holdbuttonstatus;
+        private bool mouseIsClicked;
 
         public Game1()
             : base()
@@ -110,33 +114,27 @@ namespace labb3
             //m_ballSimulation.Update(gameTime, m_ball);
             //m_explotionSystem.Draw(spriteBatch, (float)gameTime.ElapsedGameTime.TotalSeconds);
             
-            MouseState CurrentMouseClicked = Mouse.GetState();
-            MouseState previousmouseClicked = Mouse.GetState();
+            
 
-            m_newEffectSystem.setbuttonPressed(CurrentMouseClicked);
-            m_splittersystem.setbuttonPressed(CurrentMouseClicked);
+           startSystemWhenMouseIsClicked();
+           
 
-
-            if (m_splittersystem.getButtonStatus())
+          
+            if (hasAParticleSystem)
             {
-                m_splittersystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds, CurrentMouseClicked);
+               m_splittersystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+               m_newEffectSystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             }
+            
+            mouseIsClicked = false;
+            CurrentMouseState = Mouse.GetState();
 
-            if (m_newEffectSystem.getButtonStatus())
-            {
-                
-                m_newEffectSystem.Update((float)gameTime.ElapsedGameTime.TotalSeconds, CurrentMouseClicked);
-
-            }
-            bool mouseIsClicked = false;
-            currentMouseState = Mouse.GetState();
-
-            if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            if (CurrentMouseState.LeftButton == ButtonState.Pressed && PreviousMouseState.LeftButton == ButtonState.Released)
             {
                 mouseIsClicked = true;
             }
 
-            previousMouseState = currentMouseState;
+            PreviousMouseState = CurrentMouseState;
 
             
             if (mouseIsClicked)
@@ -150,14 +148,9 @@ namespace labb3
                 
             }
 
-            //foreach (var splitterparticle in splitterEffects)
-            //{
-            //    splitterparticle.Update((float)gameTime.ElapsedGameTime.TotalSeconds, CurrentMouseClicked);
-            //}
-
             foreach (var particle in effects)
             {
-                particle.Update((float)gameTime.ElapsedGameTime.TotalSeconds,CurrentMouseClicked);
+                particle.Update((float)gameTime.ElapsedGameTime.TotalSeconds,CurrentMouseState);
             }
 
             
@@ -179,20 +172,16 @@ namespace labb3
             
             
             //m_explotionSystem.Draw(spriteBatch, (float)gameTime.ElapsedGameTime.TotalSeconds);
-            MouseState mouse = Mouse.GetState();
-            m_newEffectSystem.setbuttonPressed(mouse);
-            m_splittersystem.setbuttonPressed(mouse);
+            
+            
 
-            if (m_splittersystem.getButtonStatus())
+           
+            if (hasAParticleSystem)
             {
                 m_splittersystem.Draw(spriteBatch, m_splitterTexture2D);
+                m_newEffectSystem.Draw(spriteBatch, m_newTexture2D);              
             }
 
-            if (m_newEffectSystem.getButtonStatus())
-            {
-                
-                m_newEffectSystem.Draw(spriteBatch, m_newTexture2D);
-            }
             foreach(var smoke in effects)
             {
                 smoke.Draw(spriteBatch, m_smokeTexture2D);
@@ -200,5 +189,26 @@ namespace labb3
             
             base.Draw(gameTime);
         }
+
+        protected void startSystemWhenMouseIsClicked()
+        {
+           
+           
+            if (mouseIsClicked )
+            {
+               
+                hasAParticleSystem = true;
+                doNewSystem();
+            }
+        }
+
+        protected void doNewSystem()
+        {
+            m_splittersystem.DoNewSystem(m_splittersystem.GetMousePos());
+            m_newEffectSystem.DoNewSystem(m_newEffectSystem.GetMousePos());
+        }
+
+       
     }
+   
 }
