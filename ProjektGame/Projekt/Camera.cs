@@ -8,7 +8,7 @@ namespace Projekt
         class Camera
         {
             private float scale;
-            private int width;
+           
            
 
             public Camera(int a_width, int a_height)

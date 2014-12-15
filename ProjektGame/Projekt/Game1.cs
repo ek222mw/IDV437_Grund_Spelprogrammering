@@ -12,7 +12,9 @@ namespace Projekt
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         ShipView m_shipView;
-        Level m_level;
+        LevelView m_levelView;
+        AsteroidView m_asteroidView;
+
         
 
         public Game1()
@@ -37,7 +39,8 @@ namespace Projekt
             int m_windowHeight = GraphicsDevice.Viewport.Height;
             
             m_shipView = new ShipView(m_windowWidth,m_windowHeight);
-            m_level = new Level(m_windowWidth, m_windowHeight);
+            m_levelView = new LevelView(m_windowWidth, m_windowHeight);
+            m_asteroidView = new AsteroidView(m_windowWidth, m_windowHeight);
             
             base.Initialize();
         }
@@ -51,8 +54,9 @@ namespace Projekt
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            m_level.LoadContent(Content);
+            m_levelView.LoadContent(Content);
             m_shipView.LoadContent(Content);
+            m_asteroidView.LoadContent(Content);
            
             
             // TODO: use this.Content to load your game content here
@@ -79,9 +83,11 @@ namespace Projekt
 
             // TODO: Add your update logic here
 
-            m_level.Update(gameTime);
+            m_levelView.Update(gameTime);
 
             m_shipView.Update(gameTime);
+            m_asteroidView.Update(gameTime);
+            
            
             base.Update(gameTime);
         }
@@ -97,9 +103,9 @@ namespace Projekt
             GraphicsDevice.Clear(Color.CornflowerBlue);
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            m_level.Draw(spriteBatch);
+            m_levelView.Draw(spriteBatch);
             m_shipView.Draw(spriteBatch);
-
+            m_asteroidView.Draw(spriteBatch);
             
             spriteBatch.End();
 

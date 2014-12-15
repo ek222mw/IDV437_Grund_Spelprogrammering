@@ -5,11 +5,9 @@ using System.Text;
 
 namespace Projekt
 {
-    class Ship
+    class Bullet
     {
-       public float m_x = 0.5f;
-       public float m_y = 0.5f;
-       public float m_ShipSpeed = 0.02f;
-
+        public int m_speed = 10;
+        public float m_DelayBullet = 20;
     }
 }
