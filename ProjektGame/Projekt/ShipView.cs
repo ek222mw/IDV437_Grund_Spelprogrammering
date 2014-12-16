@@ -86,16 +86,23 @@ namespace Projekt
             {
                 m_position.X = m_position.X + vShipSpeed;
             }
-           
+
+            Vector2 screenposMax;
+
+            Vector2 modelpos = new Vector2(1.0f, 1.0f);
+            screenposMax = m_camera.getViewPosPic(modelpos, m_Shiptexture);
             //Få skeppet att stanna innanför ramen.
             if (m_position.X <= 0)
             {
                 m_position.X = 0;
             }
 
-            if (m_position.X >= m_windowWidth - m_Shiptexture.Width)
+            
+
+
+            if (m_position.X >= screenposMax.X)
             {
-                m_position.X = m_windowWidth - m_Shiptexture.Width;
+                m_position.X = screenposMax.X;
             }
 
             if (m_position.Y <= 0)
@@ -103,9 +110,9 @@ namespace Projekt
                 m_position.Y = 0;
             }
 
-            if (m_position.Y >= m_windowHeight - m_Shiptexture.Height)
+            if (m_position.Y >= screenposMax.Y)
             {
-                m_position.Y = m_windowHeight - m_Shiptexture.Height;
+                m_position.Y = screenposMax.Y;
             }
 
         }
