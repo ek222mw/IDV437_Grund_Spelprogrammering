@@ -24,16 +24,19 @@ namespace Projekt
         private float vx;
         private float vSpeed;
         
+        
         public LevelView(int Width, int Height)
         {
             m_Height = Height;
             m_Width = Width;
             m_level = new Level();
             m_camera = new Camera(Width, Height);
+            
+
             vy = m_camera.getScale() * m_level.m_yBackGroundImg;
             vx = m_camera.getScale() * m_level.m_xBackGroundImg;
 
-            vSpeed = m_camera.getScale() * m_level.m_Speed;
+            vSpeed = m_camera.getLevelSpeed();
             m_position1 = new Vector2(vx, 0);
             m_position2 = new Vector2(vx, -vy);
     

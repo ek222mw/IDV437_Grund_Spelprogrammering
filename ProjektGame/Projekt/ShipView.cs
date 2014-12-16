@@ -87,33 +87,12 @@ namespace Projekt
                 m_position.X = m_position.X + vShipSpeed;
             }
 
-            Vector2 screenposMax;
-
-            Vector2 modelpos = new Vector2(1.0f, 1.0f);
-            screenposMax = m_camera.getViewPosPic(modelpos, m_Shiptexture);
-            //Få skeppet att stanna innanför ramen.
-            if (m_position.X <= 0)
-            {
-                m_position.X = 0;
-            }
+            Vector2 screenposMaxShip;
 
             
+            screenposMaxShip = m_camera.getMaxViewPosShipTexture(m_Shiptexture);
 
-
-            if (m_position.X >= screenposMax.X)
-            {
-                m_position.X = screenposMax.X;
-            }
-
-            if (m_position.Y <= 0)
-            {
-                m_position.Y = 0;
-            }
-
-            if (m_position.Y >= screenposMax.Y)
-            {
-                m_position.Y = screenposMax.Y;
-            }
+            m_position = m_ship.getCollisionWithLevelWalls(m_position, screenposMaxShip);
 
         }
 
@@ -130,12 +109,9 @@ namespace Projekt
 
         public void ShootBullets()
         {
-            if (m_bullet.m_DelayBullet >= 0)
-            {
-                m_bullet.m_DelayBullet--;
-            }
+            m_bullet.checkIfDelayGreaterThanZero();
 
-            if (m_bullet.m_DelayBullet <= 0)
+            if (m_bullet.DelayTimeBullet <= 0)
             {
                 BulletView newBulletView = new BulletView(m_windowWidth, m_windowHeight,m_BulletTexture);
                 newBulletView.m_position = new Vector2(m_position.X + 32 - newBulletView.m_texture.Width / 2, m_position.Y + 30);
@@ -147,10 +123,7 @@ namespace Projekt
                     m_BulletsList.Add(newBulletView);
                 }
 
-                if (m_bullet.m_DelayBullet == 0)
-                {
-                    m_bullet.m_DelayBullet = 20;
-                }
+               m_bullet.checkIfDelayEqualToZero();
             }
 
         }
