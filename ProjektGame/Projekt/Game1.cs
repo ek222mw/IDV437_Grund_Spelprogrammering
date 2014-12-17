@@ -14,6 +14,7 @@ namespace Projekt
         ShipView m_shipView;
         LevelView m_levelView;
         AsteroidView m_asteroidView;
+        Asteroid m_asteroid;
 
         
 
@@ -41,6 +42,7 @@ namespace Projekt
             m_shipView = new ShipView(m_windowWidth,m_windowHeight);
             m_levelView = new LevelView(m_windowWidth, m_windowHeight);
             m_asteroidView = new AsteroidView(m_windowWidth, m_windowHeight);
+            
             
             base.Initialize();
         }
@@ -87,6 +89,7 @@ namespace Projekt
 
             m_shipView.Update(gameTime);
             m_asteroidView.Update(gameTime);
+
             
            
             base.Update(gameTime);

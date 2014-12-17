@@ -29,8 +29,8 @@ namespace Projekt
             m_windowHeight = a_height;
             m_asteroid = new Asteroid();
             m_camera = new Camera(m_windowWidth, m_windowHeight);
-            float vx = m_asteroid.m_x * m_camera.getScale();
-            float vy = m_asteroid.m_y * m_camera.getScale();
+            float vx = m_camera.getAsteroidPosX();
+            float vy = m_camera.getAsteroidPosY();
             m_position = new Vector2(vx, vy);
         }
 
@@ -48,11 +48,16 @@ namespace Projekt
 
             m_bounceRect = new Rectangle((int)m_position.X, (int)m_position.Y, m_texture.Width, m_texture.Height);
 
-            m_position.Y = m_position.Y + m_asteroid.m_speed;
+            m_position.Y = m_position.Y + m_camera.getAsteroidSpeed();
 
             if (m_position.Y >= m_windowHeight)
             {
                 m_position.Y = 0;
+
+                Random random = new Random();
+                float randomposX = random.Next(1, m_windowWidth);
+                
+                m_position.X = randomposX;
             }
 
             float ElapsedTime = (float)timeElapsed.ElapsedGameTime.TotalSeconds;

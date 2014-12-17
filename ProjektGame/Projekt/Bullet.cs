@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,45 +9,24 @@ namespace Projekt
 {
     class Bullet
     {
-        private int m_speed = 10;
-        private float m_DelayBullet = 20;
+        public Rectangle bulletHitBox;
+        public Texture2D m_bulletTexture;
+        public Vector2 origin;
+        public Vector2 m_position;
+        public bool isVisible;
+        public float speed;
 
-        public int getBulletSpeed
+        public Bullet(Texture2D a_Bullettexture)
         {
-            get
-            {
-                return m_speed;
-            }
-        }
-
-        public float DelayTimeBullet
-        {
-            get
-            {
-                return m_DelayBullet;
-            }
-        }
-
-        public float checkIfDelayGreaterThanZero()
-        {
-            if (DelayTimeBullet >= 0)
-            {
-                return m_DelayBullet--;
-            }
-            return m_DelayBullet;
+            speed = 10;
+            m_bulletTexture = a_Bullettexture;
+            isVisible = false;
 
         }
 
-        public float checkIfDelayEqualToZero()
+        public Vector2 getPos()
         {
-            if (DelayTimeBullet == 0)
-            {
-                return m_DelayBullet = 20;
-            }
-            return m_DelayBullet;
+            return m_position;
         }
-        
-
-       
     }
 }

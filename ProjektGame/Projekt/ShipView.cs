@@ -20,31 +20,34 @@ namespace Projekt
         Camera m_camera;
         Ship m_ship;
         private float m_scale;
-        private List<BulletView> m_BulletsList;
+        private List<Bullet> m_BulletsList;
         
         private float vx;
         private float vy;
         private  int m_windowWidth;
         private  int m_windowHeight;
         Level m_level;
-        Bullet m_bullet;
-
+        
+        BulletSimulation m_bulletSimulation;
+       
         public ShipView(int Width, int Height)
         {
             m_windowWidth = Width;
             m_windowHeight = Height;
             m_Shiptexture = null;
-            m_BulletsList = new List<BulletView>();
+            m_BulletsList = new List<Bullet>();
             m_camera = new Camera(Width, Height);
             m_ship = new Ship();
             m_level = new Level();
-            m_bullet = new Bullet();
+           
+            m_bulletSimulation = new BulletSimulation(m_BulletTexture);
             m_scale = m_camera.getScale();
             vx = m_ship.m_x * m_scale;
             vy = m_ship.m_y * m_scale;
             m_position = new Vector2(vx, vy);
             vShipSpeed = m_camera.getScale() * m_ship.m_ShipSpeed;
            
+
             
            
             isColliding = false;
@@ -55,19 +58,20 @@ namespace Projekt
         {
             m_Shiptexture = a_content.Load<Texture2D>("ship");
             m_BulletTexture = a_content.Load<Texture2D>("playerbullet");
-
+            
         }
 
         public void Update(GameTime timeElapsed)
         {
             KeyboardState keyState = Keyboard.GetState();
-
+           
             if (keyState.IsKeyDown(Keys.Space))
             {
-                ShootBullets();
+                m_BulletsList = m_bulletSimulation.PlayerShoot(m_position,m_BulletsList, m_BulletTexture);
             }
 
-            UpdatingBulletPos();
+            
+            m_BulletsList = m_bulletSimulation.UpdateBullet(m_BulletsList);
 
             //Styrning av skeppet.
             if (keyState.IsKeyDown(Keys.W))
@@ -98,65 +102,18 @@ namespace Projekt
 
         public void Draw(SpriteBatch a_spriteBatch)
         {
-           
+           //ritar ut skeppet.
             a_spriteBatch.Draw(m_Shiptexture, m_position, Color.White);
 
-            foreach (BulletView bw in m_BulletsList)
+            // hämta position och ritar sedan ut skotten.
+            foreach (Bullet b in m_BulletsList)
             {
-                bw.Draw(a_spriteBatch);
+                Vector2 pos = b.getPos();
+                a_spriteBatch.Draw(m_BulletTexture, pos, Color.White);
             }
+            
         }
-
-        public void ShootBullets()
-        {
-            m_bullet.checkIfDelayGreaterThanZero();
-
-            if (m_bullet.DelayTimeBullet <= 0)
-            {
-                BulletView newBulletView = new BulletView(m_windowWidth, m_windowHeight,m_BulletTexture);
-                newBulletView.m_position = new Vector2(m_position.X + 32 - newBulletView.m_texture.Width / 2, m_position.Y + 30);
-
-                newBulletView.m_isVisible = true;
-
-                if (m_BulletsList.Count < 20)
-                {
-                    m_BulletsList.Add(newBulletView);
-                }
-
-               m_bullet.checkIfDelayEqualToZero();
-            }
-
-        }
-
-        public void UpdatingBulletPos()
-        {
-            foreach (BulletView bw in m_BulletsList)
-            {
-                bw.m_position.Y = bw.m_position.Y - bw.m_speed;
-
-                if (bw.m_position.Y <= 0)
-                {
-                    bw.m_isVisible = false;
-                }
-            }
-            //Remove dead bullets
-            for (int i = 0; i < m_BulletsList.Count; i++)
-            {
-
-                if (m_BulletsList[i].m_isVisible == false)
-                {
-                   
-                    m_BulletsList.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
-
 
     }
-
-
-
-
 
 }

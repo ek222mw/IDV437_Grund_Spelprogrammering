@@ -22,12 +22,14 @@ namespace Projekt
             private float textureHeight;
             Ship m_ship;
             Level m_level;
+            Asteroid m_asteroid;
 
             public Camera(int a_width, int a_height)
             {
 
                 m_ship = new Ship();
                 m_level = new Level();
+                m_asteroid = new Asteroid();
                 ScaleY = a_height;
                 ScaleX = a_width;
                 
@@ -76,6 +78,7 @@ namespace Projekt
                 float Levely = a_texture.Height / scale;
                 return new Vector2(Levelx, Levely);
             }
+
             public float getLevelSpeed()
             {
                return m_level.getLevelSpeed * scale;
@@ -84,6 +87,21 @@ namespace Projekt
             public float getScale()
             {
                 return scale;
+            }
+
+            public float getAsteroidPosX()
+            {
+               return m_asteroid.getPosX * scale;
+            }
+
+            public float getAsteroidPosY()
+            {
+                return m_asteroid.getPosY * scale;
+            }
+
+            public float getAsteroidSpeed()
+            {
+                return m_asteroid.getSpeed * scale;
             }
         }
 }
