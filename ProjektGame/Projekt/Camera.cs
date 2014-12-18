@@ -29,7 +29,7 @@ namespace Projekt
 
                 m_ship = new Ship();
                 m_level = new Level();
-                m_asteroid = new Asteroid();
+                //m_asteroid = new Asteroid();
                 ScaleY = a_height;
                 ScaleX = a_width;
                 

@@ -108,8 +108,7 @@ namespace Projekt
             // hämta position och ritar sedan ut skotten.
             foreach (Bullet b in m_BulletsList)
             {
-                Vector2 pos = b.getPos();
-                a_spriteBatch.Draw(m_BulletTexture, pos, Color.White);
+                a_spriteBatch.Draw(m_BulletTexture, b.getPos(), Color.White);
             }
             
         }

@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Asteroid.cs" />
+    <Compile Include="AsteroidSimulation.cs" />
     <Compile Include="AsteroidView.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="BulletSimulation.cs" />

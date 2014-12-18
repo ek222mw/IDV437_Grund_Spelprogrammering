@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace Projekt
 {
@@ -14,7 +16,12 @@ namespace Projekt
         ShipView m_shipView;
         LevelView m_levelView;
         AsteroidView m_asteroidView;
-        Asteroid m_asteroid;
+        
+        AsteroidSimulation m_asteroidSimulation;
+        Random random = new Random();
+        List<Asteroid> AsteroidList = new List<Asteroid>();
+        private int m_windowWidth;
+        private int m_windowHeight;
 
         
 
@@ -36,12 +43,12 @@ namespace Projekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            int m_windowWidth = GraphicsDevice.Viewport.Width;
-            int m_windowHeight = GraphicsDevice.Viewport.Height;
-            
+            m_windowWidth = GraphicsDevice.Viewport.Width;
+            m_windowHeight = GraphicsDevice.Viewport.Height;
+            m_asteroidSimulation = new AsteroidSimulation(m_windowWidth,m_windowHeight);
             m_shipView = new ShipView(m_windowWidth,m_windowHeight);
             m_levelView = new LevelView(m_windowWidth, m_windowHeight);
-            m_asteroidView = new AsteroidView(m_windowWidth, m_windowHeight);
+            m_asteroidView = new AsteroidView();
             
             
             base.Initialize();
@@ -58,7 +65,7 @@ namespace Projekt
 
             m_levelView.LoadContent(Content);
             m_shipView.LoadContent(Content);
-            m_asteroidView.LoadContent(Content);
+           
            
             
             // TODO: use this.Content to load your game content here
@@ -84,11 +91,16 @@ namespace Projekt
                 Exit();
 
             // TODO: Add your update logic here
+            foreach (Asteroid a in AsteroidList)
+            {
+                a.Update(gameTime);
+            }
+             m_asteroidSimulation.CreateAsteroids(Content.Load<Texture2D>("asteroid"), AsteroidList); 
 
             m_levelView.Update(gameTime);
 
             m_shipView.Update(gameTime);
-            m_asteroidView.Update(gameTime);
+            //m_asteroidView.Update(gameTime);
 
             
            
@@ -108,7 +120,11 @@ namespace Projekt
             spriteBatch.Begin();
             m_levelView.Draw(spriteBatch);
             m_shipView.Draw(spriteBatch);
-            m_asteroidView.Draw(spriteBatch);
+            //m_asteroidView.Draw(spriteBatch);
+            foreach (Asteroid a in AsteroidList)
+            {
+                m_asteroidView.Draw(spriteBatch,a.isVisible,a.getPosition,a.getRotation,a.getRotationAngle,a.getTexture);
+            }
             
             spriteBatch.End();
 
