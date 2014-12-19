@@ -44,6 +44,10 @@ namespace Projekt
 
         }
 
+        public Asteroid()
+        {
+        }
+
 
         public void Update(GameTime timeElapsed)
         {

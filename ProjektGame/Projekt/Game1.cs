@@ -29,7 +29,7 @@ namespace Projekt
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = 700;
+            graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 500;
             Content.RootDirectory = "Content";
         }

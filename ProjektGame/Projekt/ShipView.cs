@@ -21,7 +21,8 @@ namespace Projekt
         Ship m_ship;
         private float m_scale;
         private List<Bullet> m_BulletsList;
-        
+        private Vector2 m_BulletTextureScaled;
+        private Vector2 m_getBulletMiddleOfShipTexture;
         private float vx;
         private float vy;
         private  int m_windowWidth;
@@ -40,7 +41,7 @@ namespace Projekt
             m_ship = new Ship();
             m_level = new Level();
            
-            m_bulletSimulation = new BulletSimulation(m_BulletTexture);
+            m_bulletSimulation = new BulletSimulation(m_BulletTextureScaled);
             m_scale = m_camera.getScale();
             vx = m_ship.m_x * m_scale;
             vy = m_ship.m_y * m_scale;
@@ -58,16 +59,17 @@ namespace Projekt
         {
             m_Shiptexture = a_content.Load<Texture2D>("ship");
             m_BulletTexture = a_content.Load<Texture2D>("playerbullet");
+            m_BulletTextureScaled = m_camera.getScaledBulletTexture(m_BulletTexture);
             
         }
 
         public void Update(GameTime timeElapsed)
         {
             KeyboardState keyState = Keyboard.GetState();
-           
+            m_getBulletMiddleOfShipTexture = m_camera.getBulletPosMiddleOfShipTexture(m_Shiptexture);
             if (keyState.IsKeyDown(Keys.Space))
             {
-                m_BulletsList = m_bulletSimulation.PlayerShoot(m_position,m_BulletsList, m_BulletTexture);
+                m_BulletsList = m_bulletSimulation.PlayerShoot(m_position,m_BulletsList, m_BulletTexture, m_getBulletMiddleOfShipTexture);
             }
 
             

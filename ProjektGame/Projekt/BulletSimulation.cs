@@ -11,16 +11,16 @@ namespace Projekt
     {
         public List<Bullet> bulletList;
         public int bulletDelay = 1;
-        public Texture2D bulletTexture;
+        public Vector2 m_bulletTextureScaled;
         Bullet newBullet;
 
 
-        public BulletSimulation(Texture2D bulletTexture) {
-            
-            this.bulletTexture = bulletTexture;
+        public BulletSimulation(Vector2 a_bulletTextureScaled) {
+
+            m_bulletTextureScaled = a_bulletTextureScaled;
         }
 
-        public List<Bullet> PlayerShoot(Vector2 position, List<Bullet>bulletList, Texture2D bulletTexture)
+        public List<Bullet> PlayerShoot(Vector2 position, List<Bullet>bulletList, Texture2D bulletTexture, Vector2 a_posCenterTexture)
          {
 
             this.bulletList = bulletList;
@@ -33,7 +33,7 @@ namespace Projekt
             if (bulletDelay <= 0)
             {
                 newBullet = new Bullet(bulletTexture);
-                newBullet.m_position = new Vector2(position.X + 32 - bulletTexture.Width / 2, position.Y + 30);
+                newBullet.m_position = new Vector2(position.X + a_posCenterTexture.X - m_bulletTextureScaled.X /2, position.Y + a_posCenterTexture.Y);
                 newBullet.isVisible = true;
 
                 if (bulletList.Count() < 20)

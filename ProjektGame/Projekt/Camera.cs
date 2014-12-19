@@ -29,7 +29,7 @@ namespace Projekt
 
                 m_ship = new Ship();
                 m_level = new Level();
-                //m_asteroid = new Asteroid();
+                m_asteroid = new Asteroid();
                 ScaleY = a_height;
                 ScaleX = a_width;
                 
@@ -38,10 +38,6 @@ namespace Projekt
                 {
                     scale = ScaleY;
                 }
-
-               
-               
-
             }
 
             public Vector2 getMaxViewPosShipTexture(Texture2D a_texture)
@@ -102,6 +98,59 @@ namespace Projekt
             public float getAsteroidSpeed()
             {
                 return m_asteroid.getSpeed * scale;
+            }
+
+            public Vector2 getScaledBulletTexture(Texture2D a_BulletTexture)
+            {
+                float BulletX;
+                float BulletY;
+               
+                float scaleDiffWidth = ScaleX - ScaleY;
+                float scaleDiffHeight = ScaleY - ScaleX;
+
+
+                if (ScaleY < ScaleX)
+                {
+                    BulletX = a_BulletTexture.Width / (scale + scaleDiffWidth);
+                    BulletY = a_BulletTexture.Height / scale;
+                    
+                }
+                else
+                {
+                    BulletX = a_BulletTexture.Width / scale;
+                    BulletY = a_BulletTexture.Height / (scale+scaleDiffHeight);
+                }
+         
+                return new Vector2(BulletX, BulletY);
+            }
+
+            public Vector2 getBulletPosMiddleOfShipTexture(Texture2D a_texture)
+            {
+                float X;
+                float Y;
+                float vx;
+                float scaleDiffWidth = ScaleX - ScaleY;
+                float scaleDiffHeight = ScaleY - ScaleX;
+               
+                if (ScaleY < ScaleX)
+                {
+                    X = a_texture.Width / (scale+scaleDiffWidth);
+                    Y = a_texture.Height / scale;
+                    vx = (scale+scaleDiffWidth) * (X/2.3f);
+                    vy = scale * (Y/2);
+
+                    
+                }
+                else
+                {
+                    X = a_texture.Width / scale;
+                    Y = a_texture.Height / (scale + scaleDiffHeight);
+                    vx = scale * (X/2.3f);
+                    vy = (scale + scaleDiffHeight) * (Y/2);
+
+                }
+
+                return new Vector2(vx, vy);
             }
         }
 }
