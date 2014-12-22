@@ -26,3 +26,4 @@ C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windo
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\obj\x86\Debug\Projekt.exe
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\obj\x86\Debug\Projekt.pdb
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\healthbar.png
