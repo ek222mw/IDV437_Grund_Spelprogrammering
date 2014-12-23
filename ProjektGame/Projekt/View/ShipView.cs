@@ -16,7 +16,10 @@ namespace Projekt.View
            
             //ritar ut skeppet.
             a_spriteBatch.Draw(a_shipTexture, a_position, Color.White);
+
+            //ritar ut Livet.
             a_spriteBatch.Draw(a_lifeTexture, a_healthRect, Color.White);
+
             // hämta position och ritar sedan ut skotten.
             foreach (Bullet b in a_BulletsList)
             {

@@ -25,13 +25,25 @@ namespace Projekt.Model
 
       }
 
-        public float getLife
-        {
-            get
-            {
-                return health;
-            }
-        }
+      public float getLife
+      {
+          get
+          {
+              return health;
+          }
+      }
+
+      public float LoseLifeCollideEnemy()
+      {
+          health -= 40;
+          return health;
+      }
+
+      public float LoseLifeEnemyBullets()
+      {
+          health -= 10;
+          return health;
+      }
       
 
        public Vector2 ShipMaxCanMove

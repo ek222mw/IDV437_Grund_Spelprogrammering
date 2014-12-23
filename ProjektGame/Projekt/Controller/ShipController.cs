@@ -81,6 +81,7 @@ namespace Projekt.Controller
             
             //skalar om så att skotten alltid hamnar i centrum av skeppet oavsett upplösning.
             m_getBulletMiddleOfShipTexture = m_camera.getBulletPosMiddleOfShipTexture(m_Shiptexture);
+
             //skalar om skeppet till logiska koordinater.
             m_getScaledShiptexture = m_camera.getShipTextureScaled(m_Shiptexture);
             //Skapar en osynlig träff rektangel på skeppet.

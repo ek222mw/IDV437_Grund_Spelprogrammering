@@ -25,7 +25,10 @@ namespace Projekt.Controller
         BulletSimulation m_bulletSimulation;
         Random random = new Random();
         List<Asteroid> AsteroidList = new List<Asteroid>();
-       
+        List<Enemy> m_enemyList = new List<Enemy>();
+        EnemyController m_enemyController;
+        
+        EnemySimulation m_enemySimulation;          
         private int m_windowWidth;
         private int m_windowHeight;
 
@@ -38,6 +41,7 @@ namespace Projekt.Controller
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 500;
             Content.RootDirectory = "Content";
+            
         }
 
         /// <summary>
@@ -52,8 +56,11 @@ namespace Projekt.Controller
             m_windowWidth = GraphicsDevice.Viewport.Width;
             m_windowHeight = GraphicsDevice.Viewport.Height;
             m_asteroidSimulation = new AsteroidSimulation(m_windowWidth,m_windowHeight);
+            m_enemySimulation = new EnemySimulation(m_windowWidth, m_windowHeight);
             m_shipController = new ShipController(m_windowWidth,m_windowHeight);
             m_levelController = new LevelController(m_windowWidth, m_windowHeight);
+            m_enemyController = new EnemyController(m_windowWidth, m_windowHeight);
+
             m_asteroidView = new AsteroidView();
            
            
@@ -73,6 +80,8 @@ namespace Projekt.Controller
 
             m_levelController.LoadContent(Content);
             m_shipController.LoadContent(Content);
+            m_enemyController.LoadContent(Content);
+
            
             
            
@@ -101,6 +110,39 @@ namespace Projekt.Controller
                 Exit();
 
             // TODO: Add your update logic here
+            foreach (Enemy e in m_enemyList)
+            {
+                if (e.m_boundBox.Intersects(m_shipController.m_boundingBox))
+                {
+                    m_shipController.health = m_ship.LoseLifeCollideEnemy();
+                    e.m_isVisible = false;
+                }
+
+                for (int i = 0; i < m_enemyController.m_bulletList.Count; i++)
+                {
+                    if (m_shipController.m_boundingBox.Intersects(m_enemyController.m_bulletList[i].bulletHitBox))
+                    {
+                        m_shipController.health = m_ship.LoseLifeEnemyBullets();
+                        m_enemyController.m_bulletList.ElementAt(i).isVisible = false;
+                    }
+
+                }
+
+                for (int i = 0; i < m_shipController.m_BulletsList.Count; i++)
+                {
+                    if (m_shipController.m_BulletsList[i].bulletHitBox.Intersects(e.m_boundBox))
+                    {
+                        e.m_isVisible = false;
+                        m_shipController.m_BulletsList[i].isVisible = false;
+                        
+
+                    }
+                }
+
+                e.Update(gameTime);
+            }
+
+
             foreach (Asteroid a in AsteroidList)
             {
                 if (a.m_bounceRect.Intersects(m_shipController.m_boundingBox))
@@ -120,11 +162,12 @@ namespace Projekt.Controller
 
                     a.Update(gameTime);
             }
-             m_asteroidSimulation.CreateAsteroids(Content.Load<Texture2D>("asteroid"), AsteroidList); 
-
+             m_asteroidSimulation.CreateAsteroids(Content.Load<Texture2D>("asteroid"), AsteroidList);
+             m_enemySimulation.CreateEnemies(Content.Load<Texture2D>("enemyship"), m_enemyList);
             m_levelController.Update(gameTime);
 
             m_shipController.Update(gameTime);
+            m_enemyController.Update(gameTime, m_enemyList);
             //m_asteroidView.Update(gameTime);
 
             
@@ -150,6 +193,7 @@ namespace Projekt.Controller
             {
                 m_asteroidView.Draw(spriteBatch,a.isVisible,a.getPosition,/*a.getRotation,a.getRotationAngle,*/a.getTexture);
             }
+            m_enemyController.Draw(spriteBatch, m_enemyList);
             
             spriteBatch.End();
 

@@ -35,8 +35,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controller\EnemyController.cs" />
     <Compile Include="Model\Asteroid.cs" />
     <Compile Include="Model\AsteroidSimulation.cs" />
+    <Compile Include="Model\Enemy.cs" />
+    <Compile Include="Model\EnemySimulation.cs" />
     <Compile Include="View\AsteroidView.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\BulletSimulation.cs" />
@@ -49,6 +52,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Ship.cs" />
+    <Compile Include="View\EnemyView.cs" />
     <Compile Include="View\LevelView.cs" />
     <Compile Include="View\ShipView.cs" />
   </ItemGroup>
@@ -61,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\asteroid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\EnemyBullet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\enemyship.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\healthbar.png">
