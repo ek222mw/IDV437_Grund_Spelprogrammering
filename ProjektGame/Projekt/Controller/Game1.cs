@@ -24,10 +24,12 @@ namespace Projekt.Controller
         AsteroidSimulation m_asteroidSimulation;
         BulletSimulation m_bulletSimulation;
         Random random = new Random();
-        List<Asteroid> AsteroidList = new List<Asteroid>();
+        List<Asteroid> m_asteroidList = new List<Asteroid>();
         List<Enemy> m_enemyList = new List<Enemy>();
+        List<Explosion> m_explosionList = new List<Explosion>();
+        ExplosionController m_explosionController;
         EnemyController m_enemyController;
-        
+        HUDController m_hudController;
         EnemySimulation m_enemySimulation;          
         private int m_windowWidth;
         private int m_windowHeight;
@@ -60,6 +62,8 @@ namespace Projekt.Controller
             m_shipController = new ShipController(m_windowWidth,m_windowHeight);
             m_levelController = new LevelController(m_windowWidth, m_windowHeight);
             m_enemyController = new EnemyController(m_windowWidth, m_windowHeight);
+            m_hudController = new HUDController(m_windowWidth, m_windowHeight);
+            m_explosionController = new ExplosionController(m_windowWidth, m_windowHeight);
 
             m_asteroidView = new AsteroidView();
            
@@ -81,6 +85,7 @@ namespace Projekt.Controller
             m_levelController.LoadContent(Content);
             m_shipController.LoadContent(Content);
             m_enemyController.LoadContent(Content);
+            m_hudController.LoadContent(Content);
 
            
             
@@ -132,6 +137,8 @@ namespace Projekt.Controller
                 {
                     if (m_shipController.m_BulletsList[i].bulletHitBox.Intersects(e.m_boundBox))
                     {
+                        m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(e.getEnemyPos.X, e.getEnemyPos.Y)));
+                        m_hudController.m_playerScore += 20;
                         e.m_isVisible = false;
                         m_shipController.m_BulletsList[i].isVisible = false;
                         
@@ -143,7 +150,7 @@ namespace Projekt.Controller
             }
 
 
-            foreach (Asteroid a in AsteroidList)
+            foreach (Asteroid a in m_asteroidList)
             {
                 if (a.m_bounceRect.Intersects(m_shipController.m_boundingBox))
                 {
@@ -155,6 +162,8 @@ namespace Projekt.Controller
                 {
                     if (a.m_bounceRect.Intersects(m_shipController.m_BulletsList[i].bulletHitBox))
                     {
+                        m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(a.getPosition.X, a.getPosition.Y)));
+                        m_hudController.m_playerScore += 5;
                         a.isVisible = false;
                         m_shipController.m_BulletsList.ElementAt(i).isVisible = false;
                     }
@@ -162,13 +171,21 @@ namespace Projekt.Controller
 
                     a.Update(gameTime);
             }
-             m_asteroidSimulation.CreateAsteroids(Content.Load<Texture2D>("asteroid"), AsteroidList);
-             m_enemySimulation.CreateEnemies(Content.Load<Texture2D>("enemyship"), m_enemyList);
+
+            m_asteroidSimulation.CreateAsteroids(Content.Load<Texture2D>("asteroid"), m_asteroidList);
+            m_enemySimulation.CreateEnemies(Content.Load<Texture2D>("enemyship"), m_enemyList);
+            m_hudController.Update(gameTime);
             m_levelController.Update(gameTime);
 
             m_shipController.Update(gameTime);
             m_enemyController.Update(gameTime, m_enemyList);
-            //m_asteroidView.Update(gameTime);
+            foreach (Explosion ex in m_explosionList)
+            {
+                ex.Update(gameTime);
+            }
+
+            m_explosionController.Update(gameTime, m_explosionList);
+           
 
             
            
@@ -188,13 +205,13 @@ namespace Projekt.Controller
             spriteBatch.Begin();
             m_levelController.Draw(spriteBatch);
             m_shipController.Draw(spriteBatch);
-            //m_asteroidView.Draw(spriteBatch);
-            foreach (Asteroid a in AsteroidList)
+            m_hudController.Draw(spriteBatch);
+            foreach (Asteroid a in m_asteroidList)
             {
                 m_asteroidView.Draw(spriteBatch,a.isVisible,a.getPosition,/*a.getRotation,a.getRotationAngle,*/a.getTexture);
             }
             m_enemyController.Draw(spriteBatch, m_enemyList);
-            
+            m_explosionController.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
