@@ -8,8 +8,8 @@ namespace Projekt.Model
 {
     class Ship
     {
-       public float m_x = 0.5f;
-       public float m_y = 0.5f;
+       private float m_x = 0.5f;
+       private float m_y = 0.9f;
        private Vector2 modelposShipMaxCanMove = new Vector2(1.0f, 1.0f);
        private float health;
 
@@ -23,6 +23,15 @@ namespace Projekt.Model
           health -= 20;
           return health;
 
+      }
+
+     
+
+      
+
+      public float newGame()
+      {
+          return health = 200.0f;
       }
 
       public float getLife
@@ -80,6 +89,22 @@ namespace Projekt.Model
            }
            return a_position;
        }
+
+      public float getShipPosX
+      {
+           get
+           {
+                return m_x;
+           }
+      }
+
+      public float getShipPosY
+      {
+          get
+          {
+              return m_y;
+          }
+      }
 
 
     }

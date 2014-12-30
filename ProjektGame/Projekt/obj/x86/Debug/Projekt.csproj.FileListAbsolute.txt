@@ -33,3 +33,10 @@ C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\obj\x86\D
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\score.gif
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\500points.png
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\explosion3.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\bgmusic.mp3
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\boom1.wav
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\pulse.wav
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\explode.wav
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\firee.xnb
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\menu.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\gameover.png

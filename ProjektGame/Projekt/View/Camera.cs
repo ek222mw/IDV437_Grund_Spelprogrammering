@@ -267,5 +267,13 @@ namespace Projekt.View
 
                 return vy;
             }
+
+            public Vector2 getShipPosScaled()
+            {
+                float vx = m_ship.getShipPosX * scale;
+                float vy = m_ship.getShipPosY * scale;
+
+                return new Vector2(vx, vy);
+            }
         }
 }

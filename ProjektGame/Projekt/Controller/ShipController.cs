@@ -9,12 +9,12 @@ using Microsoft.Xna.Framework.Content;
 using Projekt.View;
 using Projekt.Model;
 
-namespace Projekt.Controller
+namespace Projekt.Model
 {
     class ShipController
     {
         private Texture2D m_Shiptexture, m_BulletTexture, m_LifeTexture;
-        private Vector2 m_position, m_healthpos;
+        public Vector2 m_position, m_healthpos;
         private float vShipSpeed;
         ShipMovement m_shipMovement;
         public Rectangle m_boundingBox, m_RectHealth;
@@ -27,13 +27,15 @@ namespace Projekt.Controller
         public Vector2 m_BulletTextureScaled;
         private Vector2 m_getBulletMiddleOfShipTexture;
         private Vector2 m_getScaledShiptexture;
-        private float vx;
-        private float vy;
+        
         private  int m_windowWidth;
         private  int m_windowHeight;
         Level m_level;
         ShipView m_shipView;
         private float m_healthHeight;
+        Sound m_sound = new Sound();
+        public float vx;
+        public float vy;
        
         
         BulletSimulation m_bulletSimulation;
@@ -51,9 +53,10 @@ namespace Projekt.Controller
             m_shipView = new ShipView();
             m_bulletSimulation = new BulletSimulation(m_BulletTextureScaled);
             m_scale = m_camera.getScale();
-            vx = m_ship.m_x * m_scale;
-            vy = m_ship.m_y * m_scale;
-            m_position = new Vector2(vx, vy);
+            vx = m_camera.getShipPosScaled().X;
+            vy = m_camera.getShipPosScaled().Y;
+
+            m_position = new Vector2(vx,vy);
             health = m_ship.getLife;
             vShipSpeed = m_camera.getScale() * m_ship.m_ShipSpeed;
             
@@ -72,6 +75,7 @@ namespace Projekt.Controller
             m_BulletTexture = a_content.Load<Texture2D>("playerbullet");
             m_LifeTexture = a_content.Load<Texture2D>("healthbar");
             m_BulletTextureScaled = m_camera.getScaledBulletTexture(m_BulletTexture);
+            m_sound.LoadContent(a_content);
             
         }
 
@@ -98,7 +102,7 @@ namespace Projekt.Controller
             //Om space nedttryckt skicka ner skottlista,position o texture till det avfyrade skottet.
             if (keyState.IsKeyDown(Keys.Space))
             {
-                m_BulletsList = m_bulletSimulation.PlayerShoot(m_position,m_BulletsList, m_BulletTexture, m_getBulletMiddleOfShipTexture);
+                m_BulletsList = m_bulletSimulation.PlayerShoot(m_position,m_BulletsList, m_BulletTexture, m_getBulletMiddleOfShipTexture, m_sound);
             }
 
             //Uppdaterar skottlistan tillhörande skeppet samt kollar om skeppet blivit träffad.
