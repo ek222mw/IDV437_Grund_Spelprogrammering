@@ -21,7 +21,8 @@ namespace Projekt.Model
         {
             Menu,
             Playing,
-            Gameover
+            Gameover,
+            Pause
         }
 
         GraphicsDeviceManager graphics;
@@ -43,7 +44,7 @@ namespace Projekt.Model
         private int m_windowWidth;
         private int m_windowHeight;
         Sound m_sound = new Sound();
-        Texture2D m_menuTexture, m_gameoverTexture;
+        Texture2D m_menuTexture, m_gameoverTexture, m_pauseTexture;
 
         State gameState = State.Menu;
 
@@ -100,6 +101,7 @@ namespace Projekt.Model
             m_sound.LoadContent(Content);
             m_menuTexture = Content.Load<Texture2D>("menu");
             m_gameoverTexture = Content.Load<Texture2D>("gameover");
+            m_pauseTexture = Content.Load<Texture2D>("pause");
            
 
            
@@ -133,7 +135,12 @@ namespace Projekt.Model
             {
                 case State.Playing:
                     {
-                        
+                        KeyboardState keystate = Keyboard.GetState();
+
+                        if (keystate.IsKeyDown(Keys.P))
+                        {
+                            gameState = State.Pause;
+                        }
                         // TODO: Add your update logic here
                         foreach (Enemy e in m_enemyList)
                         {
@@ -260,6 +267,26 @@ namespace Projekt.Model
                             //MediaPlayer.Stop();
                             break;
                         }
+                case State.Pause:
+                        {
+                            KeyboardState keystate = Keyboard.GetState();
+
+                            if (keystate.IsKeyDown(Keys.Enter))
+                            {
+                                gameState = State.Playing;
+                            }
+                            else if (keystate.IsKeyDown(Keys.M))
+                            {
+                                gameState = State.Menu;
+                            }
+                            else if (keystate.IsKeyDown(Keys.Q))
+                            {
+                                Exit();
+                            }
+
+                            break;
+
+                        }
 
             }
 
@@ -311,6 +338,11 @@ namespace Projekt.Model
                 case State.Gameover:
                     {
                         spriteBatch.Draw(m_gameoverTexture, new Vector2(0, 0), Color.White);
+                        break;
+                    }
+                case State.Pause:
+                    {
+                        spriteBatch.Draw(m_pauseTexture, new Vector2(0, 0), Color.White);
                         break;
                     }
 

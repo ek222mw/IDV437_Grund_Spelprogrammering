@@ -13,7 +13,7 @@ namespace Projekt.Model
     {
         public List<Bullet> bulletList;
         public int bulletDelay = 1;
-        public int enemyBulletDelay = 40;
+        public int enemyBulletDelay = 80;
         public List<Bullet> enemyBulletList;
         public Vector2 m_bulletTextureScaled;
         Bullet newBullet;
@@ -131,7 +131,7 @@ namespace Projekt.Model
 
             if (enemyBulletDelay == 0)
             {
-                enemyBulletDelay = 40;
+                enemyBulletDelay = 80;
             }
 
             return bulletList;
