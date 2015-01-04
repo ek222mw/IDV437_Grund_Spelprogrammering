@@ -14,10 +14,6 @@ namespace Projekt.Model
     {
         
         Texture2D m_texture, m_bulletTexture;
-        Vector2 m_position;
-        public int m_speed, m_bulletDelay, m_currentDiffGrade;
-        public float m_health;
-        
         public List<Bullet> m_bulletList;
         private int m_windowWidth;
         private int m_windowHeight;
@@ -59,11 +55,8 @@ namespace Projekt.Model
 
             foreach (Enemy e in a_enemyList)
             {
-                
-
-
                 m_bulletList = m_bulletSimulation.EnemyShoot(e.getEnemyPos, m_bulletList, m_bulletTexture, m_getBulletMiddleOfShipTexture);
-                m_bulletList = m_bulletSimulation.UpdateEnemyBullet(m_bulletList,e.m_boundBox);
+                m_bulletList = m_bulletSimulation.UpdateEnemyBullet(m_bulletList,e.m_boundBox, m_windowHeight);
             }
 
             
@@ -75,7 +68,7 @@ namespace Projekt.Model
         {
             
 
-             m_enemyView.Draw(a_spriteBatch, m_bulletList,m_bulletTexture, m_texture,m_position, a_enemyList);
+             m_enemyView.Draw(a_spriteBatch, m_bulletList,m_bulletTexture, a_enemyList);
             
         }
 

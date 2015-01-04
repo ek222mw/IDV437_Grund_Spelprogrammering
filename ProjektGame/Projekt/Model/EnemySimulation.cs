@@ -25,13 +25,13 @@ namespace Projekt.Model
 
         }
 
-        public void CreateEnemies(Texture2D a_Texture, List<Enemy> EnemyList)
+        public void CreateEnemies(Texture2D a_Texture, List<Enemy> EnemyList, int numberOfEnemies)
         {
             m_texture = a_Texture;
             int randomX = random.Next(1, m_windowWidth);
             int randomY = random.Next(-m_windowHeight, -50);
 
-            if (EnemyList.Count < 3)
+            if (EnemyList.Count < numberOfEnemies)
             {
                 EnemyList.Add(new Enemy(m_windowWidth, m_windowHeight, m_texture, new Vector2(randomX, randomY)));
             }

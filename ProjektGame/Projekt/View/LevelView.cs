@@ -16,5 +16,10 @@ namespace Projekt.View
             a_spriteBatch.Draw(m_texture, m_position2, Color.White);
 
         }
+
+        public void DrawNewLevel(SpriteBatch a_spriteBatch, Vector2 a_position, Texture2D a_texture)
+        {
+            a_spriteBatch.Draw(a_texture, a_position, Color.White);
+        }
     }
 }

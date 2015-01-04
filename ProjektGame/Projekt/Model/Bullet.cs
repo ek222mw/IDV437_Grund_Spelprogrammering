@@ -11,7 +11,6 @@ namespace Projekt.Model
     {
         public Rectangle bulletHitBox;
         public Texture2D m_bulletTexture;
-        public Vector2 origin;
         public Vector2 m_position;
         public bool isVisible;
         public float speed;

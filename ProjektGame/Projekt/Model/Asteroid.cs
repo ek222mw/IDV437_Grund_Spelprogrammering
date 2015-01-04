@@ -11,10 +11,7 @@ namespace Projekt.Model
     {
         private float m_y = -0.1f;
         private float m_x = 0.5f;
-        //private float m_speed = 0.02f;
         public bool isVisible;
-        
-
         Random random = new Random();
         public float m_rotationAngle;
         public Rectangle m_bounceRect;

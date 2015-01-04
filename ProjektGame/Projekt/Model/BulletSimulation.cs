@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Projekt.Model;
-using Projekt.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +80,7 @@ namespace Projekt.Model
             return bulletList;
         }
 
-        public List<Bullet> UpdateEnemyBullet(List<Bullet> bulletList, Rectangle a_boundingbox)
+        public List<Bullet> UpdateEnemyBullet(List<Bullet> bulletList, Rectangle a_boundingbox, int a_windowHeight)
         {
             foreach (Bullet bullet in bulletList.ToList())
             {
@@ -90,7 +89,7 @@ namespace Projekt.Model
                 bullet.m_position.Y = bullet.m_position.Y + bullet.speed;
                 bullet.bulletHitBox = a_boundingbox;
 
-                if (bullet.m_position.Y >= 950)
+                if (bullet.m_position.Y >= a_windowHeight)
                 {
                     bullet.isVisible = false;
                 }

@@ -29,7 +29,6 @@ C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\obj\x86\D
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\healthbar.png
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\EnemyBullet.png
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\enemyship.png
-C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\obj\x86\Debug\Projekt.csprojResolveAssemblyReference.cache
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\score.gif
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\500points.png
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\explosion3.png
@@ -41,3 +40,9 @@ C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windo
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\menu.png
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\gameover.png
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\pause.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\1000points.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\1500points.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\2000points.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\5000points.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\Level2.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\Level3.png
