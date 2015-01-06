@@ -12,7 +12,7 @@ namespace Projekt.Model
     {
         public SoundEffect m_playerShoot;
         public SoundEffect m_explosion;
-        public Song m_backgroundMusic;
+        public SoundEffect m_backgroundMusic;
 
         public Sound()
         {
@@ -24,9 +24,9 @@ namespace Projekt.Model
 
         public void LoadContent(ContentManager content)
         {
-            m_playerShoot = content.Load<SoundEffect>("firee");
-            //m_explosion = content.Load<SoundEffect>("boom1");
-            //m_backgroundMusic = content.Load<Song>("bgmusic");
+            m_playerShoot = content.Load<SoundEffect>("pulse");
+            m_explosion = content.Load<SoundEffect>("boom1");
+            m_backgroundMusic = content.Load<SoundEffect>("bgmusic");
         }
 
     }

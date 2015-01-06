@@ -178,7 +178,7 @@ namespace Projekt.Model
                                 {
                                     if (m_shipController.m_BulletsList[i].bulletHitBox.Intersects(e.m_boundBox))
                                     {
-                                        //m_sound.m_explosion.Play();
+                                        m_sound.m_explosion.Play();
                                         m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(e.getEnemyPos.X, e.getEnemyPos.Y)));
                                         m_hudController.m_playerScore += 20;
                                         e.m_isVisible = false;
@@ -207,7 +207,7 @@ namespace Projekt.Model
                             {
                                 if (a.m_bounceRect.Intersects(m_shipController.m_BulletsList[i].bulletHitBox))
                                 {
-                                    //m_sound.m_explosion.Play();
+                                    m_sound.m_explosion.Play();
                                     m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(a.getPosition.X, a.getPosition.Y)));
                                     m_hudController.m_playerScore += 5;
                                     a.isVisible = false;
@@ -256,7 +256,7 @@ namespace Projekt.Model
                                 numberOfEnemies = 3;
 
                                 gameState = State.Playing;
-                                //MediaPlayer.Play(m_sound.m_backgroundMusic);
+                                m_sound.m_backgroundMusic.Play();
                             }
 
                             break;
@@ -287,7 +287,7 @@ namespace Projekt.Model
                                 Exit();
                             }
 
-                            //MediaPlayer.Stop();
+                            MediaPlayer.Stop();
                             break;
                         }
                 case State.Pause:
@@ -340,9 +340,6 @@ namespace Projekt.Model
                         m_newlevelPos = new Vector2(m_windowWidth / 4.5f, 50);
                         m_levelController.Draw(spriteBatch);
                        
-
-                      
-
                         if (m_level2 >= 30)
                         {
                            
