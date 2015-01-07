@@ -21,6 +21,7 @@ namespace Projekt.Model
         Vector2 m_scorePos, m_ReachedScorePos;
         public bool m_HUDShow;
         HUDView m_hudView = new HUDView();
+        SpriteFont m_spriteFont;
 
 
 
@@ -35,10 +36,27 @@ namespace Projekt.Model
             m_player1500ScoreTexture = null;
             m_player2000ScoreTexture = null;
             m_player5000ScoreTexture = null;
+            m_spriteFont = null;
             m_HUDShow = true;
             m_scorePos = new Vector2(m_windowWidth / 2, 50);
             m_ReachedScorePos = new Vector2(m_windowWidth/3, 70);
 
+        }
+
+        public int getScore
+        {
+            get
+            {
+                return m_playerScore;
+            }
+        }
+
+        public SpriteFont getFont
+        {
+            get
+            {
+                return m_spriteFont;
+            }
         }
 
         public void LoadContent(ContentManager content)
@@ -49,6 +67,7 @@ namespace Projekt.Model
             m_player1500ScoreTexture = content.Load<Texture2D>("1500points");
             m_player2000ScoreTexture = content.Load<Texture2D>("2000points");
             m_player5000ScoreTexture = content.Load<Texture2D>("5000points");
+            m_spriteFont = content.Load<SpriteFont>("MyFont");
 
 
            
@@ -64,6 +83,7 @@ namespace Projekt.Model
         {
             if (m_HUDShow)
             {
+                m_hudView.DrawString(a_spritebatch, m_spriteFont,m_playerScore);
                 
                 if (m_playerScore >= 500 && m_playerScore <= 520)
                 {

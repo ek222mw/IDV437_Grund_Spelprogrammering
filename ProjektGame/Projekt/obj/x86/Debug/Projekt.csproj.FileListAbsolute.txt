@@ -45,3 +45,9 @@ C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\obj\x86\D
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\bgmusic.xnb
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\boom1.xnb
 C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\pulse.xnb
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\MyFont.xnb
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Content\enemy2.png
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Projekt.exe.manifest
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\bin\Windows\Debug\Projekt.application
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\obj\x86\Debug\Projekt.exe.manifest
+C:\Users\LOL\Documents\Visual Studio 2012\Projects\ProjektGame\Projekt\obj\x86\Debug\Projekt.application

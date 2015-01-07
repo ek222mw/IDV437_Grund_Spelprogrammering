@@ -27,5 +27,25 @@ namespace Projekt.View
 
             }
         }
+
+        public void DrawEnemy2(SpriteBatch a_spriteBatch, List<Bullet> a_bulletList, Texture2D a_bulletTexture, List<Enemy2> a_enemy2List)
+        {
+            foreach (Bullet b in a_bulletList)
+            {
+                a_spriteBatch.Draw(a_bulletTexture, b.getPos(), Color.White);
+            }
+
+            foreach (Enemy2 e2 in a_enemy2List)
+            {
+                if (e2.getIsVisible)
+                {
+                    a_spriteBatch.Draw(e2.getTexture, e2.getEnemyPos, Color.Blue);
+                }
+
+            }
+
+
+
+        }
     }
 }

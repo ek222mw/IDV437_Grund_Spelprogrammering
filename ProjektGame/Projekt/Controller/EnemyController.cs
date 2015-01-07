@@ -59,17 +59,28 @@ namespace Projekt.Model
                 m_bulletList = m_bulletSimulation.UpdateEnemyBullet(m_bulletList,e.m_boundBox, m_windowHeight);
             }
 
-            
+        }
 
+        public void UpdateEnemy2(GameTime gameTime, List<Enemy2> a_enemyList2)
+        {
+            m_getBulletMiddleOfShipTexture = m_camera.getBulletPosMiddleOfShipTexture(m_texture);
 
+            foreach (Enemy2 e2 in a_enemyList2)
+            {
+                m_bulletList = m_bulletSimulation.EnemyShoot(e2.getEnemyPos, m_bulletList, m_bulletTexture, m_getBulletMiddleOfShipTexture);
+                m_bulletList = m_bulletSimulation.UpdateEnemyBullet(m_bulletList, e2.m_boundBox, m_windowHeight);
+            }
         }
         
         public void Draw(SpriteBatch a_spriteBatch, List<Enemy> a_enemyList)
         {
-            
+      
+             m_enemyView.Draw(a_spriteBatch, m_bulletList,m_bulletTexture, a_enemyList);   
+        }
 
-             m_enemyView.Draw(a_spriteBatch, m_bulletList,m_bulletTexture, a_enemyList);
-            
+        public void DrawEnemy2(SpriteBatch a_spriteBatch, List<Enemy2> a_enemy2List)
+        {
+            m_enemyView.DrawEnemy2(a_spriteBatch, m_bulletList, m_bulletTexture, a_enemy2List);
         }
 
 

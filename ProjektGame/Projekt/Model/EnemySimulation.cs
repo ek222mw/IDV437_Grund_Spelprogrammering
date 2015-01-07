@@ -45,5 +45,26 @@ namespace Projekt.Model
                 }
             }
         }
+
+        public void CreateEnemies2(Texture2D a_Texture, List<Enemy2> EnemyList, int numberOfEnemies)
+        {
+            m_texture = a_Texture;
+            int randomX = random.Next(1, m_windowWidth);
+            int randomY = random.Next(-m_windowHeight, -50);
+
+            if (EnemyList.Count < numberOfEnemies)
+            {
+                EnemyList.Add(new Enemy2(m_windowWidth, m_windowHeight, m_texture, new Vector2(randomX, randomY)));
+            }
+
+            for (int i = 0; i < EnemyList.Count; i++)
+            {
+                if (EnemyList[i].m_isVisible == false)
+                {
+                    EnemyList.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
     }
 }
