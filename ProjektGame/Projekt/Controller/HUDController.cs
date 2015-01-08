@@ -76,7 +76,7 @@ namespace Projekt.Model
 
         public void Update(GameTime gameTime)
         {
-            KeyboardState keystate = Keyboard.GetState();
+            
         }
 
         public void Draw(SpriteBatch a_spritebatch)

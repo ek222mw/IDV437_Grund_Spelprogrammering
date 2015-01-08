@@ -56,7 +56,7 @@ namespace Projekt.Model
             foreach (Enemy e in a_enemyList)
             {
                 m_bulletList = m_bulletSimulation.EnemyShoot(e.getEnemyPos, m_bulletList, m_bulletTexture, m_getBulletMiddleOfShipTexture);
-                m_bulletList = m_bulletSimulation.UpdateEnemyBullet(m_bulletList,e.m_boundBox, m_windowHeight);
+                m_bulletList = m_bulletSimulation.UpdateEnemyBullet(m_bulletList,e.getBounceRec, m_windowHeight);
             }
 
         }

@@ -42,17 +42,18 @@ namespace Projekt.Model
         EnemySimulation m_enemySimulation;
         MenuView m_menuView = new MenuView();
         LevelView m_levelView = new LevelView();
-        private int m_windowWidth;
-        private int m_windowHeight;
         Sound m_sound = new Sound();
         Texture2D m_menuTexture, m_gameoverTexture, m_pauseTexture;
         Texture2D m_level2Texture, m_level3Texture;
-        private float m_level2; 
+        Vector2 m_newlevelPos;
         State gameState = State.Menu;
+
+        private int m_windowWidth;
+        private int m_windowHeight;
+        private float m_level2; 
         private int numberOfEnemies = 3;
         private float m_level3;
-        Vector2 m_newlevelPos;
-        private int Count = 0;
+        private int m_enemyHealth;
 
         public Game1()
             : base()
@@ -82,12 +83,8 @@ namespace Projekt.Model
             m_enemyController = new EnemyController(m_windowWidth, m_windowHeight);
             m_hudController = new HUDController(m_windowWidth, m_windowHeight);
             m_explosionController = new ExplosionController(m_windowWidth, m_windowHeight);
-
             m_asteroidView = new AsteroidView();
-           
-           
-            
-            
+        
             base.Initialize();
         }
 
@@ -99,7 +96,6 @@ namespace Projekt.Model
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             m_levelController.LoadContent(Content);
             m_shipController.LoadContent(Content);
             m_enemyController.LoadContent(Content);
@@ -110,15 +106,7 @@ namespace Projekt.Model
             m_pauseTexture = Content.Load<Texture2D>("pause");
             m_level2Texture = Content.Load<Texture2D>("Level2");
             m_level3Texture = Content.Load<Texture2D>("Level3");
-
-           
-
-           
             
-           
-           
-            
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -147,6 +135,7 @@ namespace Projekt.Model
                         KeyboardState keystate = Keyboard.GetState();
                         m_level2 += (float)gameTime.ElapsedGameTime.TotalSeconds;
                         m_level3 += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
                         if (keystate.IsKeyDown(Keys.P))
                         {
                             gameState = State.Pause;
@@ -157,7 +146,7 @@ namespace Projekt.Model
                            
                             foreach (Enemy e in m_enemyList)
                             {
-                                if (e.m_boundBox.Intersects(m_shipController.m_boundingBox))
+                                if (e.getBounceRec.Intersects(m_shipController.m_boundingBox))
                                 {
                                     m_shipController.health = m_ship.LoseLifeCollideEnemy();
                                     e.m_isVisible = false;
@@ -165,7 +154,7 @@ namespace Projekt.Model
 
                                 for (int i = 0; i < m_enemyController.m_bulletList.Count; i++)
                                 {
-                                    if (m_shipController.m_boundingBox.Intersects(m_enemyController.m_bulletList[i].bulletHitBox))
+                                    if (m_shipController.m_boundingBox.Intersects(m_enemyController.m_bulletList[i].getHitBox))
                                     {
                                         m_shipController.health = m_ship.LoseLifeEnemyBullets();
                                         m_enemyController.m_bulletList.ElementAt(i).isVisible = false;
@@ -175,7 +164,7 @@ namespace Projekt.Model
 
                                 for (int i = 0; i < m_shipController.m_BulletsList.Count; i++)
                                 {
-                                    if (m_shipController.m_BulletsList[i].bulletHitBox.Intersects(e.m_boundBox))
+                                    if (m_shipController.m_BulletsList[i].getHitBox.Intersects(e.getBounceRec))
                                     {
                                         m_sound.m_explosion.Play();
                                         m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(e.getEnemyPos.X, e.getEnemyPos.Y)));
@@ -193,7 +182,7 @@ namespace Projekt.Model
                             m_enemyController.Update(gameTime, m_enemyList);
                         }
 
-                        if (m_level3 >= 40)
+                        if (m_level3 >= 60)
                         {
                             foreach (Enemy2 e2 in m_enemy2List)
                             {
@@ -205,7 +194,7 @@ namespace Projekt.Model
 
                                 for (int i = 0; i < m_enemyController.m_bulletList.Count; i++)
                                 {
-                                    if (m_shipController.m_boundingBox.Intersects(m_enemyController.m_bulletList[i].bulletHitBox))
+                                    if (m_shipController.m_boundingBox.Intersects(m_enemyController.m_bulletList[i].getHitBox))
                                     {
                                         m_shipController.health = m_ship.LoseLifeEnemyBullets();
                                         m_enemyController.m_bulletList.ElementAt(i).isVisible = false;
@@ -216,11 +205,13 @@ namespace Projekt.Model
                                 for (int i = 0; i < m_shipController.m_BulletsList.Count; i++)
                                 {
 
-                                    if (m_shipController.m_BulletsList[i].bulletHitBox.Intersects(e2.m_boundBox))
+                                    if (m_shipController.m_BulletsList[i].getHitBox.Intersects(e2.m_boundBox))
                                     {
-                                        e2.health -= 20;
+                                        m_enemyHealth = e2.getHealth;
+                                        m_enemyHealth = e2.EnemyLoseLife();
+
                                         m_shipController.m_BulletsList[i].isVisible = false;
-                                        if (e2.health < 1)
+                                        if (e2.getHealth < 1)
                                         {
                                             m_sound.m_explosion.Play();
                                             m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(e2.getEnemyPos.X, e2.getEnemyPos.Y)));
@@ -240,13 +231,9 @@ namespace Projekt.Model
                             m_enemyController.UpdateEnemy2(gameTime, m_enemy2List);
                         }
 
-
-                        
-
-
                         foreach (Asteroid a in m_asteroidList)
                         {
-                            if (a.m_bounceRect.Intersects(m_shipController.m_boundingBox))
+                            if (a.getBounceRec.Intersects(m_shipController.m_boundingBox))
                             {
                                 m_shipController.health = m_ship.LoseLife();
                                 a.isVisible = false;
@@ -254,7 +241,7 @@ namespace Projekt.Model
 
                             for (int i = 0; i < m_shipController.m_BulletsList.Count; i++)
                             {
-                                if (a.m_bounceRect.Intersects(m_shipController.m_BulletsList[i].bulletHitBox))
+                                if (a.getBounceRec.Intersects(m_shipController.m_BulletsList[i].getHitBox))
                                 {
                                     m_sound.m_explosion.Play();
                                     m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(a.getPosition.X, a.getPosition.Y)));
@@ -268,10 +255,8 @@ namespace Projekt.Model
                         }
 
                         m_asteroidSimulation.CreateAsteroids(Content.Load<Texture2D>("asteroid"), m_asteroidList);
-                        
                         m_hudController.Update(gameTime);
                         m_levelController.Update(gameTime);
-
                         m_shipController.Update(gameTime);
                        
                         foreach (Explosion ex in m_explosionList)
@@ -303,8 +288,6 @@ namespace Projekt.Model
                                 m_enemy2List.Clear();
                                 m_level2 = 0;
                                 m_level3 = 0;
-                                numberOfEnemies = 3;
-
                                 gameState = State.Playing;
                                 m_sound.m_backgroundMusic.Play();
                             }
@@ -329,8 +312,7 @@ namespace Projekt.Model
                                 m_enemy2List.Clear();
                                 m_level2 = 0;
                                 m_level3 = 0;
-                                numberOfEnemies = 3;
-
+                               
                                 gameState = State.Playing;
                             }
                             else if (keystate.IsKeyDown(Keys.Q))
@@ -364,10 +346,6 @@ namespace Projekt.Model
 
             }
 
-           
-
-            
-           
             base.Update(gameTime);
         }
 
@@ -377,7 +355,6 @@ namespace Projekt.Model
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
             // TODO: Add your drawing code here
@@ -395,15 +372,14 @@ namespace Projekt.Model
                         {
                            
                             if (m_level2 <= 32)
-                            {
-                                
+                            {  
                                 m_levelView.DrawNewLevel(spriteBatch, m_newlevelPos, m_level2Texture);
                             }
-                            else if (m_level3 >= 40 && m_level3 <= 42)
+                            else if (m_level3 >= 60 && m_level3 <= 62)
                             {
                                 m_levelView.DrawNewLevel(spriteBatch, m_newlevelPos, m_level3Texture);
                             }
-                            if (m_level3 >= 40)
+                            if (m_level3 >= 60)
                             {
                                m_enemyController.DrawEnemy2(spriteBatch, m_enemy2List);
                             }
@@ -418,10 +394,7 @@ namespace Projekt.Model
                         m_shipController.Draw(spriteBatch);
                         m_hudController.Draw(spriteBatch);
                         m_explosionController.Draw(spriteBatch);
-                        
-                       
-                       
-
+                     
                         break;
                     }
 
@@ -442,11 +415,8 @@ namespace Projekt.Model
                         break;
                     }
 
-
-
             }
 
-           
             spriteBatch.End();
 
             base.Draw(gameTime);

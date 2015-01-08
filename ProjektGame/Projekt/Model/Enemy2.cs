@@ -13,23 +13,20 @@ namespace Projekt.Model
         public Rectangle m_boundBox;
         Texture2D m_texture;
         Vector2 m_position;
-        public int  m_speed, m_bulletDelay, m_currentDiffGrade;
+        public int m_speed;
         public bool m_isVisible;
         List<Bullet> m_bulletList;
         private int m_windowWidth;
         private int m_windowHeight;
-        public int health;
+        private int health;
         
 
         public Enemy2(int a_width, int a_height, Texture2D a_newTexture, Vector2 a_newPos)
         {
             m_texture = a_newTexture;
             m_bulletList = new List<Bullet>();
-           
             m_position = a_newPos;
-            
-           
-            m_speed = 5;
+            m_speed = 6;
             m_isVisible = true;
             m_windowWidth = a_width;
             m_windowHeight = a_height;
@@ -82,6 +79,20 @@ namespace Projekt.Model
             {
                 return m_isVisible;
             }
+        }
+
+        public int getHealth
+        {
+            get
+            {
+                return health;
+            }
+        }
+
+        public int EnemyLoseLife()
+        {
+            health -= 20;
+            return health;
         }
     }
 

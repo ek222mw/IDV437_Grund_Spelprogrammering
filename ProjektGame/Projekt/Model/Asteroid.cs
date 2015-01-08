@@ -14,13 +14,13 @@ namespace Projekt.Model
         public bool isVisible;
         Random random = new Random();
         public float m_rotationAngle;
-        public Rectangle m_bounceRect;
+        Rectangle m_bounceRect;
         private Vector2 m_position;
         private Texture2D m_texture;
         private int m_windowWidth;
         private int m_windowHeight;
         private int m_speed;
-        public Vector2 m_rotation;
+        Vector2 m_rotation;
         
 
 
@@ -123,6 +123,14 @@ namespace Projekt.Model
             get
             {
                 return m_speed;
+            }
+        }
+
+        public Rectangle getBounceRec
+        {
+            get
+            {
+                return m_bounceRect;
             }
         }
     }

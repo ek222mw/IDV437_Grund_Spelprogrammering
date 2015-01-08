@@ -59,9 +59,9 @@ namespace Projekt.Model
         {
             foreach (Bullet bullet in bulletList.ToList())
             {
-                a_boundingbox = new Rectangle((int)bullet.m_position.X, (int)bullet.m_position.Y, (int)bullet.m_bulletTexture.Width, (int)bullet.m_bulletTexture.Height);
+                a_boundingbox = new Rectangle((int)bullet.m_position.X, (int)bullet.m_position.Y, (int)bullet.getTexture.Width, (int)bullet.getTexture.Height);
                 
-                bullet.m_position.Y = bullet.m_position.Y - bullet.speed;
+                bullet.m_position.Y = bullet.m_position.Y - bullet.getSpeed;
                 bullet.bulletHitBox = a_boundingbox;
 
                 if (bullet.m_position.Y <= 0)
@@ -85,9 +85,9 @@ namespace Projekt.Model
         {
             foreach (Bullet bullet in bulletList.ToList())
             {
-                a_boundingbox = new Rectangle((int)bullet.m_position.X, (int)bullet.m_position.Y, (int)bullet.m_bulletTexture.Width, (int)bullet.m_bulletTexture.Height);
+                a_boundingbox = new Rectangle((int)bullet.m_position.X, (int)bullet.m_position.Y, (int)bullet.getTexture.Width, (int)bullet.getTexture.Height);
 
-                bullet.m_position.Y = bullet.m_position.Y + bullet.speed;
+                bullet.m_position.Y = bullet.m_position.Y + bullet.getSpeed;
                 bullet.bulletHitBox = a_boundingbox;
 
                 if (bullet.m_position.Y >= a_windowHeight)
@@ -171,9 +171,9 @@ namespace Projekt.Model
         {
             foreach (Bullet bullet in bulletList.ToList())
             {
-                a_boundingbox = new Rectangle((int)bullet.m_position.X, (int)bullet.m_position.Y, (int)bullet.m_bulletTexture.Width, (int)bullet.m_bulletTexture.Height);
+                a_boundingbox = new Rectangle((int)bullet.m_position.X, (int)bullet.m_position.Y, (int)bullet.getTexture.Width, (int)bullet.getTexture.Height);
 
-                bullet.m_position.Y = bullet.m_position.Y + bullet.speed;
+                bullet.m_position.Y = bullet.m_position.Y + bullet.getSpeed;
                 bullet.bulletHitBox = a_boundingbox;
 
                 if (bullet.m_position.Y >= a_windowHeight)

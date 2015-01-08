@@ -10,10 +10,10 @@ namespace Projekt.Model
     class Enemy
     {
 
-        public Rectangle m_boundBox;
+        private Rectangle m_boundBox;
         Texture2D m_texture;
         Vector2 m_position;
-        public int m_health, m_speed, m_bulletDelay, m_currentDiffGrade;
+        private int m_speed;
         public bool m_isVisible;
         List<Bullet> m_bulletList;
         private int m_windowWidth;
@@ -24,11 +24,8 @@ namespace Projekt.Model
         {
             m_texture = a_newTexture;
             m_bulletList = new List<Bullet>();
-            m_health = 3;
             m_position = a_newPos;
-            m_currentDiffGrade = 1;
-            m_bulletDelay = 40;
-            m_speed = 5;
+            m_speed = 4;
             m_isVisible = true;
             m_windowWidth = a_width;
             m_windowHeight = a_height;
@@ -79,6 +76,14 @@ namespace Projekt.Model
             get
             {
                 return m_isVisible;
+            }
+        }
+
+        public Rectangle getBounceRec
+        {
+            get
+            {
+                return m_boundBox;
             }
         }
     }
