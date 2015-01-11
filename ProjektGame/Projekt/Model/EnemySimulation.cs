@@ -28,8 +28,8 @@ namespace Projekt.Model
         public void CreateEnemies(Texture2D a_Texture, List<Enemy> EnemyList, int numberOfEnemies)
         {
             m_texture = a_Texture;
-            int randomX = random.Next(1, m_windowWidth);
-            int randomY = random.Next(-m_windowHeight, -50);
+            int randomX = random.Next(20, m_windowWidth-30);
+            int randomY = random.Next(-m_windowHeight, -20);
 
             if (EnemyList.Count < numberOfEnemies)
             {
@@ -49,8 +49,8 @@ namespace Projekt.Model
         public void CreateEnemies2(Texture2D a_Texture, List<Enemy2> EnemyList, int numberOfEnemies)
         {
             m_texture = a_Texture;
-            int randomX = random.Next(1, m_windowWidth);
-            int randomY = random.Next(-m_windowHeight, -50);
+            int randomX = random.Next(20, m_windowWidth-30);
+            int randomY = random.Next(-m_windowHeight, -20);
 
             if (EnemyList.Count < numberOfEnemies)
             {

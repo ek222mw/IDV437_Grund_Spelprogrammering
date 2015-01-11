@@ -167,7 +167,7 @@ namespace Projekt.Model
                                     if (m_shipController.m_BulletsList[i].getHitBox.Intersects(e.getBounceRec))
                                     {
                                         m_sound.m_explosion.Play();
-                                        m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(e.getEnemyPos.X, e.getEnemyPos.Y)));
+                                        m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion"), new Vector2(e.getEnemyPos.X, e.getEnemyPos.Y)));
                                         m_hudController.m_playerScore += 20;
                                         e.m_isVisible = false;
                                         m_shipController.m_BulletsList[i].isVisible = false;
@@ -214,7 +214,7 @@ namespace Projekt.Model
                                         if (e2.getHealth < 1)
                                         {
                                             m_sound.m_explosion.Play();
-                                            m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(e2.getEnemyPos.X, e2.getEnemyPos.Y)));
+                                            m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion"), new Vector2(e2.getEnemyPos.X, e2.getEnemyPos.Y)));
                                             m_hudController.m_playerScore += 40;
                                             e2.m_isVisible = false;
                                             m_shipController.m_BulletsList[i].isVisible = false;
@@ -244,7 +244,7 @@ namespace Projekt.Model
                                 if (a.getBounceRec.Intersects(m_shipController.m_BulletsList[i].getHitBox))
                                 {
                                     m_sound.m_explosion.Play();
-                                    m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion3"), new Vector2(a.getPosition.X, a.getPosition.Y)));
+                                    m_explosionList.Add(new Explosion(Content.Load<Texture2D>("explosion"), new Vector2(a.getPosition.X, a.getPosition.Y)));
                                     m_hudController.m_playerScore += 10;
                                     a.isVisible = false;
                                     m_shipController.m_BulletsList.ElementAt(i).isVisible = false;
@@ -291,6 +291,10 @@ namespace Projekt.Model
                                 gameState = State.Playing;
                                 m_sound.m_backgroundMusic.Play();
                             }
+                            if (keystate.IsKeyDown(Keys.Q))
+                            {
+                                Exit();
+                            }
 
                             break;
                         }
@@ -314,6 +318,7 @@ namespace Projekt.Model
                                 m_level3 = 0;
                                
                                 gameState = State.Playing;
+                                m_sound.m_backgroundMusic.Play();
                             }
                             else if (keystate.IsKeyDown(Keys.Q))
                             {
@@ -389,7 +394,7 @@ namespace Projekt.Model
                         
                         foreach (Asteroid a in m_asteroidList)
                         {
-                            m_asteroidView.Draw(spriteBatch, a.isVisible, a.getPosition,/*a.getRotation,a.getRotationAngle,*/a.getTexture);
+                            m_asteroidView.Draw(spriteBatch, a.isVisible, a.getPosition,a.getTexture);
                         }
                         m_shipController.Draw(spriteBatch);
                         m_hudController.Draw(spriteBatch);

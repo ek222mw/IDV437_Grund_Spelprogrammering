@@ -13,14 +13,13 @@ namespace Projekt.Model
         private float m_x = 0.5f;
         public bool isVisible;
         Random random = new Random();
-        public float m_rotationAngle;
         Rectangle m_bounceRect;
         private Vector2 m_position;
         private Texture2D m_texture;
         private int m_windowWidth;
         private int m_windowHeight;
         private int m_speed;
-        Vector2 m_rotation;
+       
         
 
 
@@ -34,11 +33,6 @@ namespace Projekt.Model
             m_windowHeight = a_height;
             m_speed = 5;
             isVisible = true;
-            m_rotation.X = m_texture.Width / 2;
-            m_rotation.Y = m_texture.Height / 2;
-            
-
-
         }
 
         public Asteroid()
@@ -58,15 +52,11 @@ namespace Projekt.Model
                 m_position.Y = 0;
 
                 Random random = new Random();
-                float randomposX = random.Next(1, m_windowWidth);
+                float randomposX = random.Next(20, m_windowWidth-30);
 
                 m_position.X = randomposX;
             }
 
-            //float ElapsedTime = (float)timeElapsed.ElapsedGameTime.TotalSeconds;
-            //m_rotationAngle += ElapsedTime;
-            //float m_Circle = MathHelper.Pi * 2;
-            //m_rotationAngle = m_rotationAngle % m_Circle;
         }
 
 
@@ -77,22 +67,6 @@ namespace Projekt.Model
                 return m_position;
             }
         }
-
-        //public Vector2 getRotation
-        //{
-        //    get
-        //    {
-        //        return m_rotation;
-        //    }
-        //}
-
-        //public float getRotationAngle
-        //{
-        //    get
-        //    {
-        //        return m_rotationAngle;
-        //    }
-        //}
 
         public Texture2D getTexture
         {

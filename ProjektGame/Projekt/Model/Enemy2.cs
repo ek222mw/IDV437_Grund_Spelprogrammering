@@ -49,7 +49,7 @@ namespace Projekt.Model
                 m_position.Y = 0;
 
                 Random random = new Random();
-                float randomposX = random.Next(1, m_windowWidth);
+                float randomposX = random.Next(20, m_windowWidth-30);
 
                 m_position.X = randomposX;
             }

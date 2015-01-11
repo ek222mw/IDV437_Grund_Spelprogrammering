@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ETy2Om7swiAzVgSx/PLckpAcmbw=</dsig:DigestValue>
+        <dsig:DigestValue>aPjrtQq/wWyLNvAC9TicBnDja7A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -228,15 +228,6 @@
       <dsig:DigestValue>79SeiURwehXhSomLDHJ2wDNDvVc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\enemy2.png" size="9312">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>E6B+bKqOWHwwlcRwjgJau8enk04=</dsig:DigestValue>
-    </hash>
-  </file>
   <file name="Content\EnemyBullet.png" size="2881">
     <hash>
       <dsig:Transforms>
@@ -255,13 +246,13 @@
       <dsig:DigestValue>R8nD9AaGjVDSvsEncfHK0HNUOPc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\explosion3.png" size="133688">
+  <file name="Content\explosion.png" size="126546">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>YL93gqajGdE7uMIVSMJ1mj2Zr3Q=</dsig:DigestValue>
+      <dsig:DigestValue>n9Q6UZKQLz9DkSyqOS0rNeavsbE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\gameover.png" size="16495">
@@ -300,13 +291,13 @@
       <dsig:DigestValue>37UNpzBiDBweuVQdx0bHfZSTHIQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\menu.png" size="17987">
+  <file name="Content\menu.png" size="21738">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>1ovDM8qVJAVl2OvAv+72pBug/+0=</dsig:DigestValue>
+      <dsig:DigestValue>rbPOT9cRM0ZxA2zHnmUmK4K8xc8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\pause.png" size="11997">

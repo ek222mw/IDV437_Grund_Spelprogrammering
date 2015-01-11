@@ -34,6 +34,7 @@ namespace Projekt.View
                 ScaleY = a_height;
                 ScaleX = a_width;
                 
+                //Från Daniels labbar/föreläsning scale och if satsen nedan.
                 scale = ScaleX;
                 if (ScaleY < ScaleX)
                 {
