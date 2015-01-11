@@ -24,14 +24,12 @@ namespace Projekt.View
         {
 
             Vector2 m_position = a_position;
-            //Vector2 m_rotation = a_rotation;
-            //float m_rotationAngle = a_rotationangle;
             bool isVisible = a_isVisible;
             Texture2D m_texture = a_texture;
 
             if (isVisible)
             {
-                a_spriteBatch.Draw(m_texture, m_position,Color.White/*, m_rotationAngle, m_rotation, 1.0f, SpriteEffects.None, 0.0f*/);
+                a_spriteBatch.Draw(m_texture, m_position,Color.White);
             }
         }
 
